@@ -13,8 +13,9 @@ TEST (Sort, sortByIncreasingPerimeter) {
     shapeList.push_back (&r1) ;
     shapeList.push_back (&c1) ;
     shapeList.push_back (&t1) ;
-    std::sortByIncreasingPerimeter (shapeList);
-    ASSERT_NEAR(3.1415926, shapeListd.back() -> perimeter(), epsilon ); // compare the address
+    Sort sortQ1 ;
+    sortQ1.sortByIncreasingPerimeter (&shapeList);
+    ASSERT_NEAR(3.1415926, shapeList.back() -> perimeter(), epsilon ); // compare the address
 }
 
 TEST (Sort, sortByDecreasingPerimeter) {
@@ -26,8 +27,9 @@ TEST (Sort, sortByDecreasingPerimeter) {
     shapeList2.push_back (&r2) ;
     shapeList2.push_back (&c2) ;
     shapeList2.push_back (&t2) ;
-    std::sortByDecreasingPerimeter (shapeList2);
-    ASSERT_NEAR(12.5663704, shapeListd2.front() -> perimeter(), epsilon );
+    Sort sortQ2 ;
+    sortQ2.sortByDecreasingPerimeter (&shapeList2);
+    ASSERT_NEAR(12.5663704, shapeList2.front() -> perimeter(), epsilon );
 }
 
 TEST (Sort, sortByIncreasingArea) {
@@ -39,8 +41,9 @@ TEST (Sort, sortByIncreasingArea) {
     shapeList3.push_back (&r3) ;
     shapeList3.push_back (&c3) ;
     shapeList3.push_back (&t3) ;
-    std::sortByIncreasingArea (shapeList3);
-    ASSERT_NEAR(30, shapeListd3.back() -> area(), epsilon );
+    Sort sortQ3 ;
+    sortQ3.sortByIncreasingArea (&shapeList3);
+    ASSERT_NEAR(30, shapeList3.back() -> area(), epsilon );
 }
 
 TEST (Sort, sortByDecreasingArea) {
@@ -52,8 +55,9 @@ TEST (Sort, sortByDecreasingArea) {
     shapeList4.push_back (&r4) ;
     shapeList4.push_back (&c4) ;
     shapeList4.push_back (&t4) ;
-    std::sortByDecreasingArea (shapeList4);
-    ASSERT_NEAR(4, shapeListd4.back() -> area(), epsilon );
+    Sort sortQ4 ;
+    sortQ4.sortByDecreasingArea (&shapeList4);
+    ASSERT_NEAR(4, shapeList4.back() -> area(), epsilon );
 }
 
 TEST (Sort, sortByIncreasingCompactness) {
@@ -65,8 +69,9 @@ TEST (Sort, sortByIncreasingCompactness) {
     shapeList5.push_back (&r5) ;
     shapeList5.push_back (&c5) ;
     shapeList5.push_back (&t5) ;
-    std::sortByIncreasingCompactness (shapeList5);
-    ASSERT_NEAR(2.5, shapeListd5.back() -> perimeter(), epsilon );
+    Sort sortQ5 ;
+    sortQ5.sortByIncreasingCompactness (&shapeList5);
+    ASSERT_NEAR(2.5, shapeList5.back() -> perimeter(), epsilon );
 }
 
 #endif
