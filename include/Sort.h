@@ -64,7 +64,7 @@ void Sort::sortByIncreasingCompactness( std::list<Shape *> * shapeList) {
 
     for ( std::list<Shape *>::iterator iterX = shapeList->begin(); iterX != shapeList->end() ; iterX++ ) {
         for ( std::list<Shape *>::iterator iterY = shapeList->begin(); iterY != shapeList->end() ; iterY++ ) {
-            if ( iterX != iterY || ( iterX->area() / iterX->perimeter() ) < ( iterY->area() / iterY->perimeter() ) ) {
+            if ( iterX != iterY || (( iterX->area() / iterX->perimeter() ) < ( iterY->area() / iterY->perimeter()) ) ) {
                 std::swap( iterX, iterY ) ;
             }
         }
