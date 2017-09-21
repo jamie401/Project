@@ -43,7 +43,7 @@ TEST (Sort, sortByDecreasingPerimeter) {
     sortQ2.sortByDecreasingPerimeter (&shapeList2);
 //    std::cout << "-----shapeList.end:" << shapeList2.back() -> perimeter() << "\n" ;
 //    std::cout << "-----shapeList.front:" << shapeList2.front() -> perimeter() << "\n" ;
-    ASSERT_NEAR(16, shapeList2.back() -> perimeter(), epsilon );
+    ASSERT_NEAR(8, shapeList2.back() -> perimeter(), epsilon );
 }
 
 TEST (Sort, sortByIncreasingArea) {
