@@ -19,7 +19,7 @@ void Sort::sortByIncreasingPerimeter( std::list<Shape *> * shapeList) {
 
     for ( std::list<Shape *>::iterator iterX = shapeList->begin(); iterX != shapeList->end() ; iterX++ )
         for ( std::list<Shape *>::iterator iterY = shapeList->begin(); iterY != shapeList->end() ; iterY++ )
-            if (  (*iterX)->perimeter() < (*iterY)->perimeter() )
+            if ( iterX != iterY && (*iterX)->perimeter() < (*iterY)->perimeter() )
                 std::swap( *iterX, *iterY ) ;
 
 }
@@ -37,7 +37,7 @@ void Sort::sortByIncreasingArea( std::list<Shape *> * shapeList) {
 
     for ( std::list<Shape *>::iterator iterX = shapeList->begin(); iterX != shapeList->end() ; iterX++ )
         for ( std::list<Shape *>::iterator iterY = shapeList->begin(); iterY != shapeList->end() ; iterY++ )
-            if (  (*iterX)->area() < (*iterY)->area() )
+            if ( iterX != iterY && (*iterX)->area() < (*iterY)->area() )
                 std::swap( *iterX, *iterY ) ;
 
 }
