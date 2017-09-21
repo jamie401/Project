@@ -6,10 +6,6 @@
 
 const double epsilon = 0.000001 ;
 
-//vertex v1 = (0, 0) ;
-//vertex v2 = (1, 0);
-//vertex v3 = (1, 1);
-
 TEST (Sort, sortByIncreasingPerimeter) {
     Rectangle r1( 0, 0, 1, 1 ) ;
     Rectangle t1( 0, 0, 2, 2 ) ;

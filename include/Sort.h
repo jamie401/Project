@@ -1,6 +1,5 @@
 #include <list>
 #include "Shapes.h"
-#include <list>
 
 class Sort {
 
