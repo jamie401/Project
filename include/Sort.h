@@ -36,21 +36,6 @@ void Sort::sortByDecreasingPerimeter( std::list<Shape *> * shapeList) {
             }
         }
     }
-
-//    for ( std::list<Shape *>::iterator iterX = shapeList->begin(); iterX != shapeList->end() ; iterX++ ) {
-//        for ( std::list<Shape *>::iterator iterY = shapeList->begin(); iterY != shapeList->end() ; iterY++ ) {
-//                std::cout << "----1XXX:" << (*iterX)->perimeter() << "\n" ;
-//                std::cout << "----1YYY:" << (*iterY)->perimeter() << "\n" ;
-//            if ( (*iterX)->perimeter() > (*iterY)->perimeter() ) {
-//                std::cout << "----2XX:" << (*iterX)->perimeter() << "\n" ;
-//                std::cout << "----2YY:" << (*iterY)->perimeter() << "\n" ;
-//                std::swap( *iterX, *iterY ) ;
-//                std::cout << "----3X:" << (*iterX)->perimeter() << "\n" ;
-//                std::cout << "----3Y:" << (*iterY)->perimeter() << "\n" ;
-//            }
-//
-//        }
-//    }
 }
 
 void Sort::sortByIncreasingArea( std::list<Shape *> * shapeList) {
