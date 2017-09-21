@@ -75,7 +75,7 @@ TEST (Sort, sortByDecreasingArea) {
     shapeList4.push_back (&t4) ;
     Sort sortQ4 ;
     sortQ4.sortByDecreasingArea (&shapeList4);
-    ASSERT_NEAR(25, shapeList4.back() -> area(), epsilon );
+    ASSERT_NEAR(4, shapeList4.back() -> area(), epsilon );
 }
 
 TEST (Sort, sortByIncreasingCompactness) {

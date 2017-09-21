@@ -80,7 +80,7 @@ void Sort::sortByDecreasingArea( std::list<Shape *> * shapeList) {
 
     for ( std::list<Shape *>::iterator iterX = shapeList->begin(); iterX != shapeList->end() ; iterX++ ) {
         for ( std::list<Shape *>::iterator iterY = shapeList->begin(); iterY != shapeList->end() ; iterY++ ) {
-            if ( iterX != iterY && (*iterX)->area() < (*iterY)->area() ) {
+            if ( iterX != iterY && (*iterX)->area() > (*iterY)->area() ) {
                 std::swap( *iterX, *iterY ) ;
             }
         }
