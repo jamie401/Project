@@ -11,13 +11,13 @@ TEST (Number,ctor) {
 }
 //test Number.symbol()
 TEST (Number, symbol) {
-    Number Num("Num");
-    ASSERT_EQ( "Num", Num.symbol() ) ;
+    Number Num("5");
+    ASSERT_EQ( "5", Num.symbol() ) ;
 }
 //?- 25=25.
 //true.
 TEST (Number, matchSuccess) {
-
+    //Number Num25("25")
 }
 //?- 25=0.
 //false.
