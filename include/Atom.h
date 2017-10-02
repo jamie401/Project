@@ -7,6 +7,7 @@ using std::string ;
 class Atom {
 public:
     Atom(string s):_symbol(s){}
+    string const symbol() { return _symbol ; }
 
 private:
     string _symbol ;
