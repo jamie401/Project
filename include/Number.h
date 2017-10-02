@@ -4,3 +4,16 @@
 #include <string>
 using std::string ;
 
+class Number{
+public:
+    Number(string s):_symbol(s) {}
+    string symbol() { return _symbol; }
+    string value() { return _value; }
+
+
+private:
+    string _value;
+    string _symbol;
+};
+
+#endif
