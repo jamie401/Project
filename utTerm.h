@@ -1,5 +1,6 @@
 #ifndef UTTERM_H
 #define UTTERM_H
+#include "Number.h"
 
 //test Number.value()
 TEST (Number,ctor) {
@@ -27,7 +28,7 @@ TEST (Number, matchFailureDiffConstant) {
 //?- 25=X.
 //true.
 TEST (Number, matchSuccessToVar) {
-  
+
 }
 
 //?- tom=25.
@@ -57,7 +58,7 @@ TEST (Atom, matchFailureToVarInstantedToDiffConstant) {
 // ?- X = 5.
 // X = 5.
 TEST (Var, matchSuccessToNumber) {
- 
+
 }
 
 // ?- X=25, X= 100.
