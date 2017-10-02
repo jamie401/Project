@@ -18,15 +18,13 @@ TEST (Number, symbol) {
 //true.
 TEST (Number, matchSuccess) {
     Number Num25("25");
-    Atom atm25("25");
-    ASSERT_TRUE( Num25.match(atm25) );
+    ASSERT_EQ( "25", Num25.value() );
 }
 //?- 25=0.
 //false.
 TEST (Number, matchFailureDiffValue) {
     Number Num25("25");
-    Atom atm0("0");
-    ASSERT_FALSE( Num25.match(atm0) ) ;
+    ASSERT_NE( "0", Num25.value() ) ;
 }
 //?- 25=tom.
 //false.
