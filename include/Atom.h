@@ -1,7 +1,7 @@
 #ifndef ATOM_H
 #define ATOM_H
 
-#include "SimpleOb.h"
+#include "simpleOb.h"
 #include <string>
 using std::string ;
 

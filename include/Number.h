@@ -1,8 +1,8 @@
 #ifndef NUMBER_H
 #define NUMBER_H
 
-#include "SimpleOb.h"
-#include "Var.h"
+#include "simpleOb.h"
+#include "variable.h"
 #include <string>
 using std::string ;
 
@@ -12,7 +12,7 @@ public:
     string const symbol() { return std::to_string( _value ); }
     string const value() { return std::to_string( _value ) ; }
     bool const match ( SimpleOb &simOb ) { return value() == simOb.symbol() ; } // Number = Atom
-    bool const match ( Var &var ) {
+    bool const match ( Variable &var ) {
         bool ret = var.assignable() ;
         if ( var.assignable() ) {
             var.setValue( _value ) ;
@@ -22,7 +22,7 @@ public:
             ret = true ;
         }
         return ret ;
-    } // Number match Var
+    } // Number match Variable
 
 private:
     int _value ; // Number with int type

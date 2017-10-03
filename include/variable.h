@@ -1,13 +1,13 @@
 #ifndef VAR_H
 #define VAR_H
 
-#include "SimpleOb.h"
+#include "simpleOb.h"
 #include <string>
 using std::string;
 
-class Var : public SimpleOb {
+class Variable : public SimpleOb {
 public:
-    Var(string s):_symbol(s) {}
+    Variable(string s):_symbol(s) {}
     const string value() { return std::to_string( _value ) ; }
     const string symbol() { return _symbol ; }
     const bool assignable() { return _assignable ; }

@@ -1,9 +1,9 @@
 #ifndef UTTERM_H
 #define UTTERM_H
 
-#include "include/Number.h"
-#include "include/Atom.h"
-#include "include/Var.h"
+#include "include/number.h"
+#include "include/atom.h"
+#include "include/variable.h"
 
 //test Number.value()
 TEST (Number,ctor) {
@@ -38,7 +38,7 @@ TEST (Number, matchFailureDiffConstant) {
 //true.
 TEST (Number, matchSuccessToVar) {
     Number Num25(25);
-    Var X("X");
+    Variable X("X");
     ASSERT_TRUE( Num25.match(X) ) ;
 }
 
@@ -69,31 +69,31 @@ TEST (Atom, matchFailureToVarInstantedToDiffConstant) {
 
 // ?- X = 5.
 // X = 5.
-TEST (Var, matchSuccessToNumber) {
-    Var X("X") ;
+TEST (Variable, matchSuccessToNumber) {
+    Variable X("X") ;
     Number Num5(5) ;
     ASSERT_TRUE( X.match(Num5) ) ;
 }
 
 // ?- X=25, X= 100.
 // false.
-TEST (Var, matchFailureToTwoDiffNumbers) {
+TEST (Variable, matchFailureToTwoDiffNumbers) {
 
 }
 
 // ?- X=tom, X= 25.
 // false.
-TEST (Var, matchSuccessToAtomThenFailureToNumber) {
+TEST (Variable, matchSuccessToAtomThenFailureToNumber) {
 
 }
 //?- tom=X, 25=X.
 //false.
-TEST (Var, matchSuccessToAtomThenFailureToNumber2) {
+TEST (Variable, matchSuccessToAtomThenFailureToNumber2) {
 
 }
 //?- X=tom, X=tom.
 //true.
-TEST(Var, reAssignTheSameAtom){
+TEST(Variable, reAssignTheSameAtom){
 
 }
 #endif
