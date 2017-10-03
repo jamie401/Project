@@ -14,6 +14,7 @@ public:
 
 private:
     string _symbol = "" ;
+    int _value = -1 ;
 };
 
 #endif

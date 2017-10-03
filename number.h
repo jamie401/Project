@@ -26,6 +26,7 @@ public:
 
 private:
     int _value = -1; // Number with int type
+    string _symbol = "";
 };
 
 #endif
