@@ -7,20 +7,23 @@ using std::string;
 
 class Var : public SimpleOb {
 public:
-    Var(string s):_value(s), _symbol(s) {}
+    Var(string s):_symbol(s) {}
     const string value() { return _value ; }
     const string symbol() { return _symbol ; }
+    const bool assignable() { return _assignable ; }
+    const void alreadyAssign() { _assignable = false ; }
+    const void setValue( string s ) { _value = s ; }
     const bool match( SimpleOb &simOb) {
         bool ret = _assignable ;
         if ( _assignable ) {
-            _symbol = simOb.symbol() ;
+            _value = simOb.value() ;
             _assignable = false ;
         } // if
-        else if ( simOb.symbol() == _value ) {
+        else if ( simOb.value() == _value ) {
             ret = true ;
         } // else
         return ret ;
-    }
+    } // Var match simpleObject
 
 private:
     string _value ;

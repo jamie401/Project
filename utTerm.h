@@ -37,7 +37,9 @@ TEST (Number, matchFailureDiffConstant) {
 //?- 25=X.
 //true.
 TEST (Number, matchSuccessToVar) {
-
+    Number Num25("25");
+    Var X("X");
+    ASSERT_TRUE( Num25.match(X) ) ;
 }
 
 //?- tom=25.
@@ -68,6 +70,8 @@ TEST (Atom, matchFailureToVarInstantedToDiffConstant) {
 // X = 5.
 TEST (Var, matchSuccessToNumber) {
     Var X("X") ;
+    Number Num5("5") ;
+    ASSERT_TRUE( X.match(Num5) ) ;
 }
 
 // ?- X=25, X= 100.
