@@ -19,13 +19,15 @@ TEST (Number, symbol) {
 //true.
 TEST (Number, matchSuccess) {
     Number Num25(25);
-    ASSERT_EQ( "25", Num25.value() );
+    ASSERT_TRUE( Num25.match(Num25) );
 }
 //?- 25=0.
 //false.
 TEST (Number, matchFailureDiffValue) {
     Number Num25(25);
-    ASSERT_NE( "0", Num25.value() ) ;
+    Number Num0(0);
+    ASSERT_FALSE( Num25.match(Num0) ) ;
+//    ASSERT_NE( "0", Num25.value() ) ;
 }
 //?- 25=tom.
 //false.
@@ -55,6 +57,7 @@ TEST (Atom, matchSuccessToVar) {
     Atom tom("tom");
     Variable X("X") ;
     ASSERT_TRUE( tom.match(X) ) ;
+    ASSERT_EQ( tom.value(), X.value() ) ;
 }
 
 // ?- X=tom, tom=X.
@@ -64,6 +67,7 @@ TEST (Atom, matchSuccessToVarInstantedToDiffConstant) {
     Variable X("X") ;
     ASSERT_TRUE( X.match(tom) ) ;
     ASSERT_TRUE( tom.match(X) ) ;
+    ASSERT_EQ( X.value(), tom.value() ) ;
 }
 
 // ?- X=jerry, tom=X.
@@ -82,6 +86,7 @@ TEST (Variable, matchSuccessToNumber) {
     Variable X("X") ;
     Number Num5(5) ;
     ASSERT_TRUE( X.match(Num5) ) ;
+    ASSERT_EQ( X.value(), Num5.value() ) ;
 }
 
 // ?- X=25, X= 100.

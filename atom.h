@@ -8,7 +8,7 @@ using std::string ;
 
 class Atom : public SimpleOb {
 public:
-    Atom(string s):_symbol(s) {}
+    Atom(string s):_symbol(s), _value(s) {}
     const string value() { return _symbol ; }
     const string symbol() { return _symbol ; }
     const bool match ( SimpleOb &simOb ) { return _value == simOb.value() ; }
@@ -18,8 +18,8 @@ public:
             var.setValue( _value ) ;
             var.alreadyAssign() ;
         }
-        else if ( var.value() != _value ) {
-            ret = true ;
+        else {
+            if ( var.value() == _value ) ret = true ;
         }
         return ret ;
     } // Atom match Variable
