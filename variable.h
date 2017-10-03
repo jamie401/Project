@@ -21,7 +21,7 @@ public:
             _symbol = simOb.symbol() ;
             _assignable = false ;
         } // if
-        else if ( simOb.value() == _value || simOb.symbol() == _symbol ) {
+        else if ( simOb.value() == _value ) {
             ret = true ;
         } // else
         return ret ;
