@@ -9,7 +9,7 @@ else
 	g++ -o hw2 main.o -lgtest -lpthread
 endif
 	
-main.o: main.cpp utTerm.h $(INC_DIR)/number.h $(INC_DIR)/atom.h $(INC_DIR)/simpleOb.h $(INC_DIR)/variable.h
+main.o: main.cpp utTerm.h number.h atom.h simpleOb.h variable.h
 	g++ -std=gnu++0x -c main.cpp
 
 clean:	
