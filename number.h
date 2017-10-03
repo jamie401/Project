@@ -18,7 +18,7 @@ public:
             var.setValue( _value ) ;
             var.alreadyAssign() ;
         }
-        else if ( stoi( var.value() ) == _value ){
+        else if ( std::stoi( var.value() ) == _value ){
             ret = true ;
         }
         return ret ;

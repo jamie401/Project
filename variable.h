@@ -13,13 +13,15 @@ public:
     const bool assignable() { return _assignable ; }
     const void alreadyAssign() { _assignable = false ; }
     const void setValue( int i ) { _value = i ; }
+    const void setSymbol( string s ) { _symbol = s ; }
     const bool match( SimpleOb &simOb) {
         bool ret = _assignable ;
         if ( _assignable ) {
-            _value = stoi( simOb.value() ) ;
+            _value = std::stoi( simOb.value() ) ;
+            _symbol = simOb.symbol() ;
             _assignable = false ;
         } // if
-        else if ( stoi( simOb.value() ) == _value ) {
+        else if ( std::stoi( simOb.value() ) == _value || simOb.symbol() == _symbol ) {
             ret = true ;
         } // else
         return ret ;

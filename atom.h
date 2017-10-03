@@ -11,6 +11,17 @@ public:
     const string value() { return _symbol ; }
     const string symbol() { return _symbol ; }
     const bool match ( SimpleOb &simOb ) { return _symbol == simOb.symbol() ; }
+    bool const match ( Variable &var ) {
+        bool ret = var.assignable() ;
+        if ( var.assignable() ) {
+            var.setSymbol( _symbol ) ;
+            var.alreadyAssign() ;
+        }
+        else if ( var.symbol() == _symbol ){
+            ret = true ;
+        }
+        return ret ;
+    } // Number match Variable
 
 private:
     string _symbol = "" ;
