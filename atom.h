@@ -14,21 +14,15 @@ public:
     const bool match ( SimpleOb &simOb ) { return _value == simOb.value() ; }
     bool const match ( Variable &var ) {
         bool ret = var.assignable() ;
-        std::cout << "555555555555555555" << var.value() << "\n" ;
-        std::cout << "555555555555555555" << value() << "\n" ;
-        std::cout << "var.value().size = " << var.value().size() << "\n" ;
-        std::cout << "value().size " << value().size() << "\n" ;
         if ( var.assignable() ) {
             var.setValue( _value ) ;
             var.alreadyAssign() ;
-            std::cout << "66666666666" << var.value() << "\n" ;
-            std::cout << "77777777777" << value() << "\n" ;
         }
         else if ( var.value() != _value ) {
             ret = true ;
         }
         return ret ;
-    } // Number match Variable
+    } // Atom match Variable
 
 private:
     string _symbol = "" ;

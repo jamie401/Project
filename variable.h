@@ -18,7 +18,7 @@ public:
         bool ret = _assignable ;
         if ( _assignable ) {
             _value = simOb.value() ;
-            _symbol = simOb.symbol() ;
+//            _symbol = simOb.symbol() ;
             _assignable = false ;
         } // if
         else if ( simOb.value() == _value ) {
