@@ -3,6 +3,7 @@
 
 #include "include/Number.h"
 #include "include/Atom.h"
+#include "include/Var.h"
 
 //test Number.value()
 TEST (Number,ctor) {
@@ -29,7 +30,9 @@ TEST (Number, matchFailureDiffValue) {
 //?- 25=tom.
 //false.
 TEST (Number, matchFailureDiffConstant) {
-
+    Number Num25("25");
+    Atom atom("tom");
+    ASSERT_FALSE( Num25.match(atom) ) ;
 }
 //?- 25=X.
 //true.
@@ -64,7 +67,7 @@ TEST (Atom, matchFailureToVarInstantedToDiffConstant) {
 // ?- X = 5.
 // X = 5.
 TEST (Var, matchSuccessToNumber) {
-
+    Var X("X") ;
 }
 
 // ?- X=25, X= 100.
