@@ -7,37 +7,37 @@
 
 //test Number.value()
 TEST (Number,ctor) {
-    Number Num("1");
+    Number Num(1);
     ASSERT_EQ( "1", Num.value() ) ;
 }
 //test Number.symbol()
 TEST (Number, symbol) {
-    Number Num("5");
+    Number Num(5);
     ASSERT_EQ( "5", Num.symbol() ) ;
 }
 //?- 25=25.
 //true.
 TEST (Number, matchSuccess) {
-    Number Num25("25");
+    Number Num25(25);
     ASSERT_EQ( "25", Num25.value() );
 }
 //?- 25=0.
 //false.
 TEST (Number, matchFailureDiffValue) {
-    Number Num25("25");
+    Number Num25(25);
     ASSERT_NE( "0", Num25.value() ) ;
 }
 //?- 25=tom.
 //false.
 TEST (Number, matchFailureDiffConstant) {
-    Number Num25("25");
+    Number Num25(25);
     Atom atom("tom");
     ASSERT_FALSE( Num25.match(atom) ) ;
 }
 //?- 25=X.
 //true.
 TEST (Number, matchSuccessToVar) {
-    Number Num25("25");
+    Number Num25(25);
     Var X("X");
     ASSERT_TRUE( Num25.match(X) ) ;
 }
@@ -45,7 +45,8 @@ TEST (Number, matchSuccessToVar) {
 //?- tom=25.
 //false.
 TEST (Atom, matchFailureDiffConstant) {
-
+    Atom tom("tom");
+    ASSERT_NE( tom.symbol(), "25" ) ;
 }
 
 // ?- tom = X.
@@ -70,7 +71,7 @@ TEST (Atom, matchFailureToVarInstantedToDiffConstant) {
 // X = 5.
 TEST (Var, matchSuccessToNumber) {
     Var X("X") ;
-    Number Num5("5") ;
+    Number Num5(5) ;
     ASSERT_TRUE( X.match(Num5) ) ;
 }
 
