@@ -11,14 +11,14 @@ public:
     Number(int i):_value(i) {}
     string const symbol() { return std::to_string( _value ); }
     string const value() { return std::to_string( _value ) ; }
-    bool const match ( SimpleOb &simOb ) { return value() == simOb.symbol() ; } // Number = Atom
+    bool const match ( SimpleOb &simOb ) { return value() == simOb.value() ; } // Number = Atom
     bool const match ( Variable &var ) {
         bool ret = var.assignable() ;
         if ( var.assignable() ) {
-            var.setValue( _value ) ;
+            var.setValue( std::to_string( _value ) ) ;
             var.alreadyAssign() ;
         }
-        else if ( std::stoi( var.value() ) == _value ){
+        else if ( var.value() == value() ){
             ret = true ;
         }
         return ret ;

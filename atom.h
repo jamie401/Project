@@ -2,6 +2,7 @@
 #define ATOM_H
 
 #include "simpleOb.h"
+#include "variable.h"
 #include <string>
 using std::string ;
 
@@ -10,14 +11,14 @@ public:
     Atom(string s):_symbol(s) {}
     const string value() { return _symbol ; }
     const string symbol() { return _symbol ; }
-    const bool match ( SimpleOb &simOb ) { return _symbol == simOb.symbol() ; }
+    const bool match ( SimpleOb &simOb ) { return _value == simOb.value() ; }
     bool const match ( Variable &var ) {
         bool ret = var.assignable() ;
         if ( var.assignable() ) {
-            var.setSymbol( _symbol ) ;
+            var.setValue( _value ) ;
             var.alreadyAssign() ;
         }
-        else if ( var.symbol() == _symbol ){
+        else if ( var.value() == _value ){
             ret = true ;
         }
         return ret ;
@@ -25,7 +26,7 @@ public:
 
 private:
     string _symbol = "" ;
-    int _value = -1 ;
+    string _value = "" ;
 };
 
 #endif
