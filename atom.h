@@ -13,7 +13,7 @@ public:
     const bool match ( SimpleOb &simOb ) { return _symbol == simOb.symbol() ; }
 
 private:
-    string _symbol ;
+    string _symbol = "" ;
 };
 
 #endif

@@ -26,8 +26,8 @@ public:
     } // Var match simpleObject
 
 private:
-    int _value = 0 ;
-    string _symbol ;
+    int _value = -1 ;
+    string _symbol = "";
     bool _assignable = true ;
 };
 

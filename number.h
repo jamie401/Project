@@ -25,7 +25,7 @@ public:
     } // Number match Variable
 
 private:
-    int _value ; // Number with int type
+    int _value = -1; // Number with int type
 };
 
 #endif
