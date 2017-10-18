@@ -8,25 +8,25 @@ using std::string ;
 
 class Atom : public Term {
 public:
-    Atom(string s):_symbol(s), _value(s) {}
-    string value() const { return _symbol ; }
+    Atom(string s):_symbol(s) {}
+//    string value() const { return _symbol ; }
     string symbol() const { return _symbol ; }
-    bool match ( Term &term ) { return _value == term.value() ; }
+    bool match ( Term &term ) { return _symbol == term.value() ; }
     bool match ( Variable &var ) {
         bool ret = var.assignable() ;
         if ( var.assignable() ) {
-            var.setValue( _value ) ;
+            var.setValue( this ) ;
             var.alreadyAssign() ;
         }
         else {
-            if ( var.value() == _value ) ret = true ;
+            if ( var.value() == _symbol ) ret = true ;
         }
         return ret ;
     } // Atom match Variable
 
-//private:
+private:
     string _symbol = "" ;
-    string _value = "" ;
+//    string _value = "" ;
 };
 
 #endif
