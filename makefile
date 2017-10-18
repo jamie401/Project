@@ -1,18 +1,18 @@
 INC_DIR = include
 
-all:  utTerm
+all:  utVariable
 
-utTerm: main.o
+utVariable: main.o
 ifeq (${OS}, Windows_NT)
-	g++ -o hw2 main.o -lgtest
+	g++ -o hw3 main.o -lgtest
 else
-	g++ -o hw2 main.o -lgtest -lpthread
+	g++ -o hw3 main.o -lgtest -lpthread
 endif
-	
-main.o: main.cpp utTerm.h number.h atom.h simpleOb.h variable.h
+
+main.o: main.cpp utVariable.h number.h atom.h term.h variable.h
 	g++ -std=gnu++0x -c main.cpp
 
-clean:	
+clean:
 ifeq (${OS}, Windows_NT)
 	del *.o *.exe
 else

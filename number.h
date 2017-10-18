@@ -1,18 +1,19 @@
 #ifndef NUMBER_H
 #define NUMBER_H
 
-#include "simpleOb.h"
+#include "term.h"
 #include "variable.h"
 #include <string>
+#include <sstream>
 using std::string ;
 
-class Number : public SimpleOb {
+class Number : public Term {
 public:
-    Number(int i):_value(i) {}
-    string const symbol() { return std::to_string( _value ); }
-    string const value() { return std::to_string( _value ) ; }
-    bool const match ( SimpleOb &simOb ) { return value() == simOb.value() ; } // Number = Atom
-    bool const match ( Variable &var ) {
+    Number(double i):_value(i) { ss << _value ; }
+    string symbol() const { return ss.str(); }
+    string value() const { return symbol() ; }
+//    bool const match ( Term &term ) { return value() == term.value() ; } // Number = Atom
+    bool match ( Variable &var ) {
         bool ret = var.assignable() ;
         if ( var.assignable() ) {
             var.setValue( std::to_string( _value ) ) ;
@@ -25,7 +26,8 @@ public:
     } // Number match Variable
 
 private:
-    int _value = -1; // Number with int type
+    std::stringstream ss ;
+    double _value = 0.0; // Number with int type
     string _symbol = "";
 };
 

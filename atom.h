@@ -1,18 +1,18 @@
 #ifndef ATOM_H
 #define ATOM_H
 
-#include "simpleOb.h"
+#include "term.h"
 #include "variable.h"
 #include <string>
 using std::string ;
 
-class Atom : public SimpleOb {
+class Atom : public Term {
 public:
     Atom(string s):_symbol(s), _value(s) {}
-    const string value() { return _symbol ; }
-    const string symbol() { return _symbol ; }
-    const bool match ( SimpleOb &simOb ) { return _value == simOb.value() ; }
-    bool const match ( Variable &var ) {
+    string value() const { return _symbol ; }
+    string symbol() const { return _symbol ; }
+    bool match ( Term &term ) { return _value == term.value() ; }
+    bool match ( Variable &var ) {
         bool ret = var.assignable() ;
         if ( var.assignable() ) {
             var.setValue( _value ) ;
@@ -24,7 +24,7 @@ public:
         return ret ;
     } // Atom match Variable
 
-private:
+//private:
     string _symbol = "" ;
     string _value = "" ;
 };
