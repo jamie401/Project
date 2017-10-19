@@ -138,6 +138,7 @@ TEST (Variable, Struct2) {
   Struct Sx(Atom("s"), v);
   EXPECT_TRUE(Y.match(Sx));
   EXPECT_TRUE(X.match(teddy));
+//  ASSERT_NE("teddy", X.value());
   ASSERT_EQ("Y", Y.symbol());
   ASSERT_EQ("s(teddy)", Y.value());
 }

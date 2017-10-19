@@ -21,13 +21,22 @@ public:
   Atom const & name() {
     return _name;
   }
-  
+
   string symbol() const{
     string ret =_name.symbol() + "(";
     for(int i = 0; i < _args.size() - 1 ; i++){
       ret += _args[i]-> symbol() + ", ";
     }
     ret += _args[_args.size()-1]-> symbol() + ")";
+    return  ret;
+  }
+
+  string value() const{
+    string ret =_name.value() + "(";
+    for(int i = 0; i < _args.size() - 1 ; i++){
+      ret += _args[i]-> value() + ", ";
+    }
+    ret += _args[_args.size()-1]-> value() + ")";
     return  ret;
   }
 

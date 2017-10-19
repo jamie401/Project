@@ -79,7 +79,11 @@ TEST(Struct, match5)
 // and #value() should also return "s(X)"
 TEST(Struct, var)
 {
-
+  Variable X("X");
+  std::vector<Term *> v = {&X} ;
+  Struct Sx(Atom("s"), v);
+  ASSERT_EQ("s(X)", Sx.symbol()) ;
+  ASSERT_EQ("s(X)", Sx.value()) ;
 }
 
 // Given there is Struct s contains a Variable X
@@ -88,7 +92,13 @@ TEST(Struct, var)
 // and #value() should also return "s(tom)"
 TEST(Struct, var_match_atom)
 {
-
+  Variable X("X");
+  std::vector<Term *> v = {&X} ;
+  Struct Sx(Atom("s"), v);
+  Atom tom("tom") ;
+  EXPECT_TRUE(X.match(tom));
+  ASSERT_EQ("s(X)", Sx.symbol());
+  ASSERT_EQ("s(tom)", Sx.value());
 }
 
 // Given there are Struct s1 and Struct s2
@@ -98,7 +108,13 @@ TEST(Struct, var_match_atom)
 // and #value() of s1 should also return "s1(s2(X))"
 TEST(Struct, nested_struct1)
 {
-
+  Variable X("X");
+  std::vector<Term *> v1 = {&X};
+  Struct S2(Atom("s2"), v1);
+  std::vector<Term *> v2 = {&S2};
+  Struct S1(Atom("s1"), v2);
+  ASSERT_EQ("s1(s2(X))", S1.symbol());
+  ASSERT_EQ("s1(s2(X))", S1.value());
 }
 
 // Given there are Struct s1 contains Struct s2
@@ -108,7 +124,15 @@ TEST(Struct, nested_struct1)
 // and #value() of s1 should return "s1(s2(tom))"
 TEST(Struct, nested_struct2)
 {
-
+  Variable X("X");
+  std::vector<Term *> v2 = {&X};
+  Struct S2(Atom("s2"), v2);
+  std::vector<Term *> v1 = {&S2};
+  Struct S1(Atom("s1"), v1);
+  Atom tom("tom");
+  EXPECT_TRUE(X.match(tom));
+  ASSERT_EQ("s1(s2(X))", S1.symbol());
+  ASSERT_EQ("s1(s2(tom))", S1.value());
 }
 
 // Given there are Struct s1 contains Struct s2
@@ -118,7 +142,15 @@ TEST(Struct, nested_struct2)
 // and #value() of s1 should return "s1(s2(3.14))"
 TEST(Struct, nested_struct3)
 {
-
+  Variable X("X");
+  std::vector<Term *> v2 = {&X};
+  Struct S2(Atom("s2"), v2);
+  std::vector<Term *> v1 = {&S2};
+  Struct S1(Atom("s1"), v1);
+  Number pi(3.14);
+  EXPECT_TRUE(X.match(pi));
+  ASSERT_EQ("s1(s2(X))", S1.symbol());
+  ASSERT_EQ("s1(s2(3.14))", S1.value());
 }
 
 // Given there are Struct s1 contains Struct s2 and Variable X
@@ -129,6 +161,15 @@ TEST(Struct, nested_struct3)
 // and #value() of s1 should return "s1(s2(kent_beck), kent_beck)"
 TEST(Struct, nested_struct_and_multiVariable)
 {
-
+  Variable X("X");
+  Variable Y("Y");
+  std::vector<Term *> v2 = {&Y} ;
+  Struct S2(Atom("s2"), v2);
+  std::vector<Term *> v1 = {&S2, &X};
+  Struct S1(Atom("s1"), v1);
+  Atom kent_beck("kent_beck");
+  EXPECT_TRUE(X.match(Y));
+  EXPECT_TRUE(X.match(kent_beck));
+  ASSERT_EQ("s1(s2(Y), X)", S1.symbol());
+  ASSERT_EQ("s1(s2(kent_beck), kent_beck)", S1.value());
 }
-
