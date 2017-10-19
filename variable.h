@@ -33,7 +33,6 @@ private:
     Term * _value;
     string _symbol = "";
     bool _assignable = true ; // 是否可以assign
-    bool _assignableVar_NOvalue = false ; // 是否 assign過 卻沒有value
 };
 
 #endif
