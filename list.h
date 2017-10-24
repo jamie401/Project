@@ -29,11 +29,17 @@ public:
   }
 
   bool match(Term & term) {
-
-  }
-
-  Term * elements(int index) {
-    return _elements[index] ;
+    List * ps = dynamic_cast<List *>(&term);
+    if (ps){
+      if(_elements.size()!= ps->_elements.size())
+        return false;
+      for(int i=0;i<_elements.size();i++){
+        if(_elements[i]->symbol() != ps->_elements[i]->symbol())
+            return false;
+      }
+      return true;
+    }
+    return false;
   }
 
 public:
@@ -43,6 +49,7 @@ public:
   Term * head() const{
     return _elements.front() ;
   }
+  
   List * tail() {
     vector<Term *> temp = _elements;
     if ( temp.size() > 0 ) {
