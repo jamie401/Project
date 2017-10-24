@@ -16,6 +16,7 @@ public:
     const bool assignable() { return _assignable ; }
     const void alreadyAssign() { _assignable = false ; }
     const void setValue( Term * term ) { _value = term ; }
+    const bool not_value() { if( _value == NULL ) return true ; }
     bool match( Term &term) {
         bool ret = _assignable ;
         if ( _assignable ) {

@@ -2,6 +2,7 @@
 #define LIST_H
 
 #include "term.h"
+#include "variable.h"
 
 #include <vector>
 using std::vector;
@@ -35,6 +36,7 @@ public:
         return false;
       for(int i=0;i<_elements.size();i++){
         if(_elements[i]->symbol() != ps->_elements[i]->symbol())
+          if( !_elements[i]->match( *(ps->_elements[i]) ) )
             return false;
       }
       return true;
@@ -49,7 +51,7 @@ public:
   Term * head() const{
     return _elements.front() ;
   }
-  
+
   List * tail() {
     vector<Term *> temp = _elements;
     if ( temp.size() > 0 ) {
