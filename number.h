@@ -9,7 +9,7 @@ using std::string ;
 
 class Number : public Term {
 public:
-    Number(int i):_value(i) { ss << _value ; }
+    Number(double i):_value(i) { ss << _value ; }
     string symbol() const { return ss.str(); }
 //    string value() const { return symbol() ; }
     bool match ( Term &term ) { return symbol() == term.value() ; } // Number = Atom
@@ -27,7 +27,7 @@ public:
 
 private:
     std::stringstream ss ;
-    int _value = 0.0; // Number with int type
+    double _value = 0.0; // Number with int type
     string _symbol = "";
 };
 

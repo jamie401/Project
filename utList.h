@@ -91,7 +91,7 @@ TEST(List, matchToVarShouldSucceed) {
   Atom ter("terence_tao");
   vector<Term *> arg = {&num, &X, &ter};
   List l(arg);
-  ASSERT_TRUE( Y.match(l) );
+  EXPECT_TRUE( Y.match(l) );
   EXPECT_EQ( "[496, X, terence_tao]", Y.value() );
 }
 
