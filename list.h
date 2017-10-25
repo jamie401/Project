@@ -44,9 +44,9 @@ public:
       return true;
     }
     else if (pv){
-      if ( pv.assignable() ) {
-          pv.setValue( this ) ;
-          pv.alreadyAssign() ;
+      if ( pv->assignable() ) {
+          pv->setValue( this ) ;
+          pv->alreadyAssign() ;
       }
     }
     return false;
