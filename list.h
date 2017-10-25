@@ -59,35 +59,19 @@ public:
   List (vector<Term *> const & elements):_elements(elements){}
 
   Term * head() const{
-    try{
-      if (_elements.empty()) throw 0 ;
-      return _elements.front() ;
-    }
-    catch(...) {
-      std::cout << "Accessing head in a an empty list" ;
-    }
-    Atom * temp_null = new Atom("0");
-    return temp_null;
-
+    if (_elements.empty()) throw string("Accessing head in an empty list") ;
+    return _elements.front() ;
   }
 
   List * tail() {
     vector<Term *> temp = _elements;
-    try {
-      if (_elements.empty()) throw 0 ;
-      if ( temp.size() > 0 ) {
-        temp.erase( temp.begin() ) ;
-        List *l = new List(temp);
-        return l ;
-      }
-      else return this ;
+    if (_elements.empty()) throw string("Accessing head in an empty list") ;
+    if ( temp.size() > 0 ) {
+      temp.erase( temp.begin() ) ;
+      List *l = new List(temp);
+      return l ;
     }
-    catch(...) {
-      std::cout << "Accessing tail in a an empty list" ;
-    }
-    List *l = new List(temp);
-    return l;
-
+    else return this ;
   }
 
 private:

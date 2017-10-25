@@ -212,7 +212,12 @@ TEST(List, headAndTailMatching4) {
 TEST (List, emptyExecptionOfHead) {
   vector<Term *> v = {};
   List l(v) ;
-  EXPECT_EQ( "0", l.head()->value()) ;
+  try{
+    l.head();
+  }
+  catch( string e){
+    EXPECT_EQ( "Accessing head in an empty list", e ) ;
+  }
 }
 
 // Given there is a empty list
@@ -221,7 +226,12 @@ TEST (List, emptyExecptionOfHead) {
 TEST (List, emptyExecptionOfTail) {
   vector<Term *> v = {};
   List l(v) ;
-  EXPECT_EQ( "[]", l.tail()->value()) ;
+  try{
+    l.tail();
+  }
+  catch( string e){
+    EXPECT_EQ( "Accessing head in an empty list", e ) ;
+  }
 }
 /* good
 TEST (List, ListMatchVar){
