@@ -3,6 +3,7 @@
 
 #include "term.h"
 #include "variable.h"
+#include "atom.h"
 
 #include <iostream>
 #include <vector>
@@ -65,7 +66,7 @@ public:
     catch(...) {
       std::cout << "Accessing head in a an empty list" ;
     }
-    Variable * temp_null = new Variable("[]");
+    Atom * temp_null = new Atom("");
     return temp_null;
 
   }
