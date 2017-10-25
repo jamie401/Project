@@ -4,6 +4,7 @@
 #include "term.h"
 #include "variable.h"
 
+#include <iostream>
 #include <vector>
 using std::vector;
 
@@ -49,17 +50,35 @@ public:
   List (vector<Term *> const & elements):_elements(elements){}
 
   Term * head() const{
-    return _elements.front() ;
+    try{
+      if (_elements.empty()) throw 0 ;
+      return _elements.front() ;
+    }
+    catch(...) {
+      std::cout << "Accessing head in a an empty list" ;
+    }
+    Variable * temp_null = new Variable("[]");
+    return temp_null;
+
   }
 
   List * tail() {
     vector<Term *> temp = _elements;
-    if ( temp.size() > 0 ) {
-      temp.erase( temp.begin() ) ;
-      List *l = new List(temp);
-      return l ;
+    try {
+      if (_elements.empty()) throw 0 ;
+      if ( temp.size() > 0 ) {
+        temp.erase( temp.begin() ) ;
+        List *l = new List(temp);
+        return l ;
+      }
+      else return this ;
     }
-    else return this ;
+    catch(...) {
+      std::cout << "Accessing tail in a an empty list" ;
+    }
+    List *l = new List(temp);
+    return l;
+
   }
 
 private:
