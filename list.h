@@ -32,6 +32,7 @@ public:
 
   bool match(Term & term) {
     List * ps = dynamic_cast<List *>(&term);
+    Variable  * pv = dynamic_cast<Variable *>(&term);
     if (ps){
       if(_elements.size()!= ps->_elements.size())
         return false;
@@ -41,6 +42,12 @@ public:
             return false;
       }
       return true;
+    }
+    else if (pv){
+      if ( pv.assignable() ) {
+          pv.setValue( this ) ;
+          pv.alreadyAssign() ;
+      }
     }
     return false;
   }
