@@ -212,7 +212,7 @@ TEST(List, headAndTailMatching4) {
 TEST (List, emptyExecptionOfHead) {
   vector<Term *> v = {};
   List l(v) ;
-  EXPECT_EQ( "", l.head()->value()) ;
+  EXPECT_EQ( "0", l.head()->value()) ;
 }
 
 // Given there is a empty list

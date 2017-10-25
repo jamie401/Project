@@ -66,7 +66,7 @@ public:
     catch(...) {
       std::cout << "Accessing head in a an empty list" ;
     }
-    Atom * temp_null = new Atom("");
+    Atom * temp_null = new Atom("0");
     return temp_null;
 
   }
