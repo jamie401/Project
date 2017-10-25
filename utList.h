@@ -223,8 +223,16 @@ TEST (List, emptyExecptionOfTail) {
   List l(v) ;
   EXPECT_EQ( "[]", l.tail()->value()) ;
 }
-
-
+/* good
+TEST (List, ListMatchVar){
+  Number num(2);
+  Atom tom("tom");
+  Variable X("X");
+  vector<Term *> v = {&num, &tom};
+  List l(v);
+  EXPECT_TRUE( l.match(X) );
+  EXPECT_EQ( "[2, tom]", X.value() );
+} */
 
 
 #endif

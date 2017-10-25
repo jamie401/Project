@@ -45,8 +45,9 @@ public:
     }
     else if (pv){
       if ( pv->assignable() ) {
-          pv->setValue( this ) ;
-          pv->alreadyAssign() ;
+        pv->setValue( this ) ;
+        pv->alreadyAssign() ;
+        return true;
       }
     }
     return false;
