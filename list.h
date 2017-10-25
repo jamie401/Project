@@ -65,7 +65,7 @@ public:
 
   List * tail() {
     vector<Term *> temp = _elements;
-    if (_elements.empty()) throw string("Accessing head in an empty list") ;
+    if (_elements.empty()) throw string("Accessing tail in an empty list") ;
     if ( temp.size() > 0 ) {
       temp.erase( temp.begin() ) ;
       List *l = new List(temp);
