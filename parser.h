@@ -31,6 +31,9 @@ public:
         else
           return atom;
     }
+    else if(token == LIST ){
+      
+    }
     return nullptr;
   }
 

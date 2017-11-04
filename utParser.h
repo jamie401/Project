@@ -71,8 +71,9 @@ TEST_F(ParserTest, listOfTermsTwo) {
 TEST_F(ParserTest, parseStructOfStruct) {
   Scanner scanner("point(1, X, z(1,2,3))");
   Parser parser(scanner);
-  std::vector<Term *> terms = parser.getArgs();
-  ASSERT_EQ("point(1, X, z(1,2,3))", parser.createTerm()->symbol());
+//  std::vector<Term *> terms = parser.getArgs();
+//  ASSERT_EQ("point(1, X, z(1, 2, 3))", terms[0]->symbol());
+  ASSERT_EQ("point(1, X, z(1, 2, 3))", parser.createTerm()->symbol());
 }
 
 
@@ -80,7 +81,11 @@ TEST_F(ParserTest, parseStructOfStruct) {
 // When parser parses all terms via scanner.
 // Then it should return two terms, one is "12345", another is "67".
 TEST_F(ParserTest, listOfTermsTwoNumbers) {
-
+  Scanner scanner(" 12345,  67");
+  Parser parser(scanner);
+  std::vector<Term*> terms = parser.getArgs();
+  ASSERT_EQ("12345", terms[0]->symbol());
+  ASSERT_EQ("67", terms[1]->symbol());
 }
 
 
@@ -89,7 +94,9 @@ TEST_F(ParserTest, listOfTermsTwoNumbers) {
 // Then it should return a Struct.
 // And #symbol() of Strcut should return "point(1, X, z)".
 TEST_F(ParserTest, parseStructThreeArgs) {
-
+  Scanner scanner("point(1, X, z)");
+  Parser parser(scanner);
+  ASSERT_EQ("point(1, X, z)", parser.createTerm()->symbol());
 }
 
 
@@ -98,7 +105,9 @@ TEST_F(ParserTest, parseStructThreeArgs) {
 // Then it should return a List.
 // And #symbol() of List should return "[]".
 TEST_F(ParserTest, parseListEmpty) {
-
+  Scanner scanner("   [   ]");
+  Parser parser(scanner);
+  ASSERT_EQ("[]", parser.createTerm()->symbol());
 }
 
 
@@ -107,7 +116,9 @@ TEST_F(ParserTest, parseListEmpty) {
 // Then it should return a Variable.
 // And #symbol() of Variable should return "_date".
 TEST_F(ParserTest, parseVar) {
-
+  Scanner scanner("_date");
+  Parser parser(scanner);
+  ASSERT_EQ("_date", parser.createTerm()->symbol());
 }
 
 
@@ -115,7 +126,9 @@ TEST_F(ParserTest, parseVar) {
 // When parser parses all terms via scanner.
 // Then it should return nothing.
 TEST_F(ParserTest, listOfTermsEmpty) {
-
+  Scanner scanner("");
+  Parser parser(scanner);
+  ASSERT_EQ(nullptr, parser.createTerm());
 }
 
 
@@ -124,7 +137,9 @@ TEST_F(ParserTest, listOfTermsEmpty) {
 // Then it should return a Struct.
 // And #symbol() of Strcut should return "s(s(s(s(1))))".
 TEST_F(ParserTest, parseStructOfStructAllTheWay) {
-
+  Scanner scanner("s(s(s(s(1))))");
+  Parser parser(scanner);
+  ASSERT_EQ("s(s(s(s(1))))", parser.createTerm()->symbol());
 }
 
 
