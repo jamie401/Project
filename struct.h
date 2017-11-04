@@ -18,6 +18,10 @@ public:
     return _args[index];
   }
 
+  int arity() {
+    return _args.size();
+  }
+
   Atom const & name() {
     return _name;
   }
