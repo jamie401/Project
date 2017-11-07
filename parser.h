@@ -32,14 +32,14 @@ public:
         else
           return atom;
     }
-    else if( token == LIST ){
+    /*else if( token == LIST ){
       if(_scanner.currentChar() == '[') {
         _scanner.nextToken();
         vector<Term *> terms = getArgs();
         if(_currentToken == ']')
           return new List(terms);
       }
-    }
+    }*/
     return nullptr;
   }
 
