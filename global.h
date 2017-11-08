@@ -43,6 +43,11 @@ bool isSpecialCh(char c) {
          || c == ':';
 }
 
+bool isListCh(char c) {
+  return c == '['
+      || c == ']';
+}
+
 bool symbolExist(string s, int & val) {
   bool found = false;
   val = -1;

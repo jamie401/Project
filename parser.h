@@ -17,32 +17,33 @@ public:
   Parser(Scanner scanner) : _scanner(scanner){}
   Term* createTerm(){
     int token = _scanner.nextToken();
-    vector<Term*> terms ;
     if(token == VAR){
       return new Variable(symtable[_scanner.tokenValue()].first);
     }else if(token == NUMBER){
       return new Number(_scanner.tokenValue());
-    }else if(token == ATOM){
+    }else if(token == ATOM || token == ATOMSC){
         Atom* atom = new Atom(symtable[_scanner.tokenValue()].first);
         if(_scanner.currentChar() == '(' ) {
           _scanner.nextToken() ;
-          terms = getArgs();
+          vector<Term*> terms = getArgs();
           if(_currentToken == ')' || _scanner.currentChar() == ')')
             return new Struct(*atom, terms);
         }
         else
           return atom;
     }
-    else if( token == LIST ){
-      printf("\n--11--\n" );
-      if(_scanner.currentChar() == '[') {
-        printf("\n--22--\n" );
+    else if( token == '[' ){
+      _scanner.skipLeadingWhiteSpace();
+      if(_scanner.currentChar() == ')') throw string("unexpected token") ;
+      if( _scanner.currentChar() == ']') {
         _scanner.nextToken();
-        terms = getArgs();
-        if(_currentToken == ']' || _scanner.currentChar() == ']') {
-          printf("\n--33--\n" );
+        return new List();
+      }
+      else {
+        vector<Term*> terms = getArgs();
+        if(_currentToken == ')') throw string("unexpected token") ;
+        if( _currentToken == ']' )
           return new List(terms);
-        }
       }
     }
     return nullptr;
@@ -51,7 +52,9 @@ public:
   vector<Term*> getArgs()
   {
     vector<Term*> args ;
-    if( _scanner.currentChar() == ')' || _scanner.currentChar() == ']' ) return args;
+    if( _scanner.currentChar() == ')' || _scanner.currentChar() == ']' ) {
+      return args;
+    }
     Term* term = createTerm();
     if(term)
       args.push_back(term);

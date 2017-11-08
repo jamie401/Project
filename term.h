@@ -9,6 +9,8 @@ public:
     virtual string value() const { return symbol() ;}
     virtual string symbol() const = 0;
     virtual bool match( Term & term ) { return symbol() == term.symbol() ; }
+    virtual int arity() {}
+    virtual Term * args(int a) {}
 };
 
 #endif

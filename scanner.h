@@ -20,7 +20,7 @@ public:
       else if (isdigit(currentChar())) {
         _tokenValue = extractNumber();
         return NUMBER;
-      }  else if (islower(currentChar())) {
+      }  else if (islower(currentChar()) ) {
         string s = extractAtom();
         processToken<ATOM>(s);
         return ATOM;
@@ -32,11 +32,7 @@ public:
         string s = extractVar();
         processToken<VAR>(s);
         return VAR;
-      }/* else if (currentChar() == '[' ) { // is LIST or not
-        /*string s = extractList();
-        processToken<LIST>(s);
-        return LIST;
-      } */else {
+      } else {
         _tokenValue = NONE;
         return extractChar();
       }
@@ -82,6 +78,12 @@ public:
 
   char extractChar() {
     return buffer[pos++];
+  }
+
+  string extractList() {
+    int posBegin = position();
+    for (;isListCh(buffer[pos]); ++pos);
+    return buffer.substr(posBegin, pos-posBegin);
   }
 
 private:
