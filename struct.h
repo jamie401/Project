@@ -28,6 +28,7 @@ public:
 
   string symbol() const{
     string ret =_name.symbol() + "(";
+    if( _args.empty() ) return _name.value() + "()";
     for(int i = 0; i < _args.size() - 1 ; i++){
       ret += _args[i]-> symbol() + ", ";
     }
@@ -37,6 +38,7 @@ public:
 
   string value() const{
     string ret =_name.value() + "(";
+    if( _args.empty() ) return _name.value() + "()";
     for(int i = 0; i < _args.size() - 1 ; i++){
       ret += _args[i]-> value() + ", ";
     }

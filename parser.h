@@ -17,6 +17,7 @@ public:
   Parser(Scanner scanner) : _scanner(scanner){}
   Term* createTerm(){
     int token = _scanner.nextToken();
+    vector<Term*> terms ;
     if(token == VAR){
       return new Variable(symtable[_scanner.tokenValue()].first);
     }else if(token == NUMBER){
@@ -25,19 +26,24 @@ public:
         Atom* atom = new Atom(symtable[_scanner.tokenValue()].first);
         if(_scanner.currentChar() == '(' ) {
           _scanner.nextToken() ;
-          vector<Term*> terms = getArgs();
-          if(_currentToken == ')')
+          terms = getArgs();
+          if(_currentToken == ')' || _scanner.currentChar() == ')')
             return new Struct(*atom, terms);
         }
         else
           return atom;
     }
     else if( token == LIST ){
+      printf("\n--11--\n" );
       if(_scanner.currentChar() == '[') {
+        printf("\n--22--\n" );
         _scanner.nextToken();
         vector<Term *> terms = getArgs();
-        if(_currentToken == ']')
+        if(_currentToken == ']' || _scanner.currentChar() == ']') {
+          printf("\n--33--\n" );
           return new List(terms);
+        }
+
       }
     }
     return nullptr;
@@ -45,8 +51,9 @@ public:
 
   vector<Term*> getArgs()
   {
+    vector<Term*> args ;
+    if( _scanner.currentChar() == ')' || _scanner.currentChar() == ']' ) return args;
     Term* term = createTerm();
-    vector<Term*> args;
     if(term)
       args.push_back(term);
     while((_currentToken = _scanner.nextToken()) == ',') {

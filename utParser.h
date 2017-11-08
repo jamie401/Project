@@ -7,6 +7,7 @@
 #include "list.h"
 #include "variable.h"
 #include "number.h"
+#include "struct.h"
 
 class ParserTest : public ::testing::Test {
 protected:
@@ -108,6 +109,7 @@ TEST_F(ParserTest, parseListEmpty) {
 /*  Scanner scanner("   [   ]");
   Parser parser(scanner);
   ASSERT_EQ("[]", parser.createTerm()->symbol());*/
+
 }
 
 
@@ -137,9 +139,9 @@ TEST_F(ParserTest, listOfTermsEmpty) {
 // Then it should return a Struct.
 // And #symbol() of Strcut should return "s(s(s(s(1))))".
 TEST_F(ParserTest, parseStructOfStructAllTheWay) {
-  Scanner scanner("s(s(s(s())))");
+  Scanner scanner("s(s(s(s(1)))))");
   Parser parser(scanner);
-  ASSERT_EQ("s(s(s(s())))", parser.createTerm()->symbol());
+  ASSERT_EQ("s(s(s(s(1))))", parser.createTerm()->symbol());
 }
 
 
