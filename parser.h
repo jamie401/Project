@@ -38,12 +38,11 @@ public:
       if(_scanner.currentChar() == '[') {
         printf("\n--22--\n" );
         _scanner.nextToken();
-        vector<Term *> terms = getArgs();
+        terms = getArgs();
         if(_currentToken == ']' || _scanner.currentChar() == ']') {
           printf("\n--33--\n" );
           return new List(terms);
         }
-
       }
     }
     return nullptr;
