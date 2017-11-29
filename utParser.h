@@ -407,7 +407,7 @@ TEST_F(ParserTest, DisjTwoMatchingSuccess) {
   EXPECT_EQ(4, terms.size());
   EXPECT_EQ("X", terms[0]->symbol());
   EXPECT_EQ("1", terms[1]->symbol());
-/*  EXPECT_EQ("X", terms[2]->symbol());
+  EXPECT_EQ("X", terms[2]->symbol());
   EXPECT_EQ("2", terms[3]->symbol());
   EXPECT_EQ("X", symtable[0].first);
 
@@ -423,7 +423,7 @@ TEST_F(ParserTest, DisjTwoMatchingSuccess) {
   EXPECT_TRUE(et->evaluate());
 
   EXPECT_EQ("1", terms[0]->value());
-  EXPECT_EQ("2", terms[2]->value());*/
+  EXPECT_EQ("2", terms[2]->value());
 }
 
 TEST_F(ParserTest, MatchingSuccess) {
@@ -435,8 +435,8 @@ TEST_F(ParserTest, MatchingSuccess) {
   EXPECT_TRUE(et->evaluate());
 
   EXPECT_EQ("1", terms[0]->value());
-//  EXPECT_EQ("2", terms[2]->value());
-//  EXPECT_EQ("s(s(2))", terms[4]->value());
+  EXPECT_EQ("2", terms[2]->value());
+  EXPECT_EQ("s(s(2))", terms[4]->value());
 }
 
 #endif

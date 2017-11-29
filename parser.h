@@ -36,7 +36,10 @@ public:
           _expressionTree = new Node(COMMA, 0, left, right) ;
         }
         else if ( _currentToken == ';' ) {
-
+          Node* left = _expressionTree ;
+          matchings();
+          Node* right = _expressionTree ;
+          _expressionTree = new Node(SEMICOLON, 0, left, right) ;
         }
 
       } // while
