@@ -23,8 +23,6 @@ public:
         {
           bool l = left->evaluate();
           bool r = right->evaluate();
-          if(l) printf("\nnode1\n" );
-          if(r) printf("\nnode2\n" );
           return l && r ;
         }
         return left->evaluate() && right->evaluate() ;

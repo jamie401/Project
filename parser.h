@@ -39,11 +39,8 @@ public:
             Variable * pv = dynamic_cast<Variable *>(_terms[i]);
             if(pv)
               for ( int j = _rangeFirstIndex ; j < _terms.size() ; j++){
-                if( ( pv->symbol() == _terms[j]->symbol() ) && j > i ){
-                  printf("\nfuck_term[%d]\n", j );
+                if( ( pv->symbol() == _terms[j]->symbol() ) && j > i )
                   pv->match(*(_terms[j]));
-                }
-
               }
           }// for
         }
@@ -54,9 +51,10 @@ public:
           Node* right = _expressionTree ;
           _expressionTree = new Node(SEMICOLON, 0, left, right) ;
         }
-
       } // while
     } // if
+    if (symtable.back().first == ".")
+      symtable.pop_back();
   } // matchings()
 
   Node* expressionTree() {
