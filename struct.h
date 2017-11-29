@@ -5,6 +5,8 @@
 #include "atom.h"
 #include <vector>
 #include <string>
+#include "variable.h"
+#include <iostream>
 
 using std::string;
 
@@ -60,6 +62,14 @@ public:
       return true;
     }
     return false;
+  }
+
+  void haveVar(Variable *var){ // have same Variable, then match
+    for(int i = 0; i < _args.size() ; i++){
+      if( var->symbol() == _args[i]->symbol() ){
+        var->match(*(_args[i]));
+      }
+    }
   }
 
 private:

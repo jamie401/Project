@@ -39,8 +39,13 @@ public:
             Variable * pv = dynamic_cast<Variable *>(_terms[i]);
             if(pv)
               for ( int j = _rangeFirstIndex ; j < _terms.size() ; j++){
+                Struct * ps = dynamic_cast<Struct *>(_terms[j]);
                 if( ( pv->symbol() == _terms[j]->symbol() ) && j > i )
                   pv->match(*(_terms[j]));
+                else if( ps ){
+                  printf("\ni=%d,j=%d\n", i, j );
+                  ps->haveVar(pv);
+                }
               }
           }// for
         }
