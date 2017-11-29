@@ -19,7 +19,11 @@ public:
     const bool not_value() { if( _value == NULL ) return true ; }
     bool match( Term &term) {
         bool ret = _assignable ;
+  /*      if ( _assignable && ( term.symbol() == _value->symbol() ) )
+          _value = &term ;
+        else */
         if ( _assignable ) {
+
           _value = &term ;
           _assignable = false ;
         } // if

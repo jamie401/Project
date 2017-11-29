@@ -15,7 +15,7 @@ using std::string;
 
 class Parser{
 public:
-  Parser(Scanner scanner) : _scanner(scanner), _terms(){}
+  Parser(Scanner scanner) : _scanner(scanner), _terms(), _rangeFirstIndex(0){}
 
   void matchings() {
     Term* term = createTerm();
@@ -34,8 +34,18 @@ public:
           matchings();
           Node* right = _expressionTree ;
           _expressionTree = new Node(COMMA, 0, left, right) ;
+          // match the same variable
+          for ( int i = _rangeFirstIndex ; i < _terms.size() ; i++ ) {
+            Variable * pv = dynamic_cast<Variable *>(_terms[i]);
+            if(pv)
+              for ( int j = _rangeFirstIndex ; j < _terms.size() ; j++){
+                if( ( pv->symbol() == _terms[j]->symbol() ) && j > i )
+                  pv->match(*(_terms[j]));
+                }
+              }// for
         }
         else if ( _currentToken == ';' ) {
+          _rangeFirstIndex = _terms.size();
           Node* left = _expressionTree ;
           matchings();
           Node* right = _expressionTree ;
@@ -127,5 +137,6 @@ private:
   Scanner _scanner;
   int _currentToken;
   Node* _expressionTree;
+  int _rangeFirstIndex;
 };
 #endif
