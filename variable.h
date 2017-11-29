@@ -19,11 +19,8 @@ public:
     const bool not_value() { if( _value == NULL ) return true ; }
     bool match( Term &term) {
         bool ret = _assignable ;
-  /*      if ( _assignable && ( term.symbol() == _value->symbol() ) )
-          _value = &term ;
-        else */
+        Variable *pv = dynamic_cast<Variable *>(&term);
         if ( _assignable ) {
-
           _value = &term ;
           _assignable = false ;
         } // if
@@ -31,6 +28,11 @@ public:
             ret = true ;
         } // else
         else if ( _value->match(term) ) ret = true ;
+        else if (pv) // X.match(X) , Y.match(X)
+          if ( pv-> assignable()){
+            pv->setValue( _value ) ;
+            return true;
+          }
         return ret ;
     } // Var match simpleObject
 

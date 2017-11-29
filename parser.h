@@ -39,10 +39,13 @@ public:
             Variable * pv = dynamic_cast<Variable *>(_terms[i]);
             if(pv)
               for ( int j = _rangeFirstIndex ; j < _terms.size() ; j++){
-                if( ( pv->symbol() == _terms[j]->symbol() ) && j > i )
+                if( ( pv->symbol() == _terms[j]->symbol() ) && j > i ){
+                  printf("\nfuck_term[%d]\n", j );
                   pv->match(*(_terms[j]));
                 }
-              }// for
+
+              }
+          }// for
         }
         else if ( _currentToken == ';' ) {
           _rangeFirstIndex = _terms.size();

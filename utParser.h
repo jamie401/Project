@@ -292,7 +292,7 @@ TEST_F(ParserTest, TwoVariableMatching2) {
   EXPECT_TRUE(et->evaluate());
 
   EXPECT_EQ("1", terms[0]->value());
-  EXPECT_EQ("1", terms[2]->value());
+  EXPECT_EQ("1", terms[3]->value());
 }
 
 TEST_F(ParserTest, TwoVariableMatching3) {
