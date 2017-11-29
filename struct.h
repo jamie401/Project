@@ -70,10 +70,9 @@ public:
         var->match(*(_args[i]));
         return;
       }
-    /*  Struct * ps = dynamic_cast<Struct *>(_args[i]);
-      ps->haveVar(var);*/
+      Struct * ps = dynamic_cast<Struct *>(_args[i]);
+      if(ps) ps->haveVar(var);
     }
-
   }
 
 private:

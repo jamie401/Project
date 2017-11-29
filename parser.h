@@ -42,10 +42,8 @@ public:
                 Struct * ps = dynamic_cast<Struct *>(_terms[j]);
                 if( ( pv->symbol() == _terms[j]->symbol() ) && j > i )
                   pv->match(*(_terms[j]));
-                else if( ps ){
-                  printf("\ni=%d,j=%d\n", i, j );
+                else if( ps )
                   ps->haveVar(pv);
-                }
               }
           }// for
         }
