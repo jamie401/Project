@@ -65,11 +65,15 @@ public:
   }
 
   void haveVar(Variable *var){ // have same Variable, then match
-    for(int i = 0; i < _args.size() ; i++){
+    for(int i = 0; i < _args.size() ; i++) {
       if( var->symbol() == _args[i]->symbol() ){
         var->match(*(_args[i]));
+        return;
       }
+    /*  Struct * ps = dynamic_cast<Struct *>(_args[i]);
+      ps->haveVar(var);*/
     }
+
   }
 
 private:
