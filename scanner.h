@@ -80,12 +80,6 @@ public:
     return buffer[pos++];
   }
 
-  string extractList() {
-    int posBegin = position();
-    for (;isListCh(buffer[pos]); ++pos);
-    return buffer.substr(posBegin, pos-posBegin);
-  }
-
 private:
   string buffer;
   int pos;

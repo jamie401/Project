@@ -23,13 +23,13 @@ public:
     {
       _terms.push_back(term);
       while((_currentToken = _scanner.nextToken()) == ',' || _currentToken == '=' || _currentToken == ';') {
-        if ( _currentToken = '=' ) {
+        if ( _currentToken == '=' ) {
           Node* left = new Node( TERM, _terms.back(), 0, 0 ) ;
           _terms.push_back(createTerm());
           Node* right = new Node( TERM, _terms.back(), 0, 0 );
           _expressionTree = new Node(EQUALITY, 0, left, right) ;
         }
-        else if ( _currentToken = ',' ) {
+        else if ( _currentToken == ',' ) {
           Node* left = _expressionTree ;
           matchings();
           Node* right = _expressionTree ;
