@@ -18,11 +18,33 @@ public:
   Parser(Scanner scanner) : _scanner(scanner), _terms(){}
 
   void matchings() {
+    Term* term = createTerm();
+    if(term!=nullptr)
+    {
+      _terms.push_back(term);
+      while((_currentToken = _scanner.nextToken()) == ',' || _currentToken == '=' || _currentToken == ';') {
+        if ( _currentToken = '=' ) {
+          Node* left = new Node( TERM, _terms.back(), 0, 0 ) ;
+          _terms.push_back(createTerm());
+          Node* right = new Node( TERM, _terms.back(), 0, 0 );
+          _expressionTree = new Node(EQUALITY, 0, left, right) ;
+        }
+        else if ( _currentToken = ',' ) {
+          Node* left = _expressionTree ;
+          matchings();
+          Node* right = _expressionTree ;
+          _expressionTree = new Node(COMMA, 0, left, right) ;
+        }
+        else if ( _currentToken = ';' ) {
 
-  }
+        }
+
+      } // while
+    } // if
+  } // matchings()
 
   Node* expressionTree() {
-    
+    return  _expressionTree ;
   }
 
   Term* createTerm(){
@@ -101,5 +123,6 @@ private:
   vector<Term *> _terms;
   Scanner _scanner;
   int _currentToken;
+  Node* _expressionTree;
 };
 #endif

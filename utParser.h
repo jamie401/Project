@@ -247,7 +247,7 @@ TEST_F(ParserTest, TwoTermsMatching) {
   EXPECT_EQ("1", terms[0]->value());
   EXPECT_EQ("2", terms[2]->value());
 }
-
+/*
 TEST_F(ParserTest, ThreeTermsMatching) {
   Scanner scanner("X=1, Y=2, Z=3.");
   Parser parser(scanner);
@@ -438,5 +438,5 @@ TEST_F(ParserTest, MatchingSuccess) {
   EXPECT_EQ("2", terms[2]->value());
   EXPECT_EQ("s(s(2))", terms[4]->value());
 }
-
+*/
 #endif
