@@ -35,7 +35,7 @@ public:
           Node* right = _expressionTree ;
           _expressionTree = new Node(COMMA, 0, left, right) ;
         }
-        else if ( _currentToken = ';' ) {
+        else if ( _currentToken == ';' ) {
 
         }
 
