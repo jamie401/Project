@@ -7,6 +7,8 @@
 #include <sstream>
 using std::string ;
 
+class Iterator;
+
 class Number : public Term {
 public:
     Number(double i):_value(i) { ss << _value ; }
@@ -24,6 +26,10 @@ public:
         }
         return ret ;
     } // Number match Variable
+
+    Iterator * createIterator(){
+      return new NullIterator(this);
+    }
 
 private:
     std::stringstream ss ;

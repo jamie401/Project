@@ -8,13 +8,14 @@ using std::string;
 #include "global.h"
 #include "scanner.h"
 #include "struct.h"
+#include "number.h"
+#include "term.h"
 #include "list.h"
-
-#include "utParser.h"
+#include "node.h"
 
 class Parser{
 public:
-  Parser(Scanner scanner) : _scanner(scanner), _terms(){}
+  Parser(Scanner scanner) : _scanner(scanner), _terms(), _rangeFirstIndex(0){}
 
   void matchings() {
     Term* term = createTerm();
@@ -139,5 +140,7 @@ private:
   vector<Term *> _terms;
   Scanner _scanner;
   int _currentToken;
+  Node* _expressionTree;
+  int _rangeFirstIndex;
 };
 #endif

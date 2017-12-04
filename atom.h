@@ -1,32 +1,36 @@
 #ifndef ATOM_H
 #define ATOM_H
 
-#include "term.h"
-#include "variable.h"
 #include <string>
-using std::string ;
+#include <sstream>
+using std::string;
 
-class Atom : public Term {
+class Iterator;
+class Term{
 public:
-    Atom(string s):_symbol(s) {}
-//    string value() const { return _symbol ; }
-    string symbol() const { return _symbol ; }
-    bool match ( Term &term ) { return _symbol == term.value() ; }
-    bool match ( Variable &var ) {
-        bool ret = var.assignable() ;
-        if ( var.assignable() ) {
-            var.setValue( this ) ;
-            var.alreadyAssign() ;
-        }
-        else {
-            if ( var.value() == _symbol ) ret = true ;
-        }
-        return ret ;
-    } // Atom match Variable
+  virtual string symbol() const {return _symbol;}
+  virtual string value() const {return symbol();}
+  virtual bool match(Term & a);
+  virtual Iterator * createIterator();
+protected:
+  Term ():_symbol(""){}
+  Term (string s):_symbol(s) {}
+  Term(double db){
+    std::ostringstream strs;
+    strs << db;
+    _symbol = strs.str();
+  }
+  string _symbol;
+};
 
-private:
-    string _symbol = "" ;
-//    string _value = "" ;
+class Atom : public Term{
+public:
+  Atom(string s):Term(s) {}
+};
+
+class Number : public Term{
+public:
+  Number(double db):Term(db) {}
 };
 
 #endif

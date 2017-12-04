@@ -1,21 +1,19 @@
-INC_DIR = include
+all: utIterator
 
-all:  utParser
+atom.o: atom.cpp atom.h variable.h
+	g++ -std=c++11 -c atom.cpp
+list.o:list.cpp list.h
+		g++ -std=c++11 -c list.cpp
+struct.o:struct.cpp struct.h
+		g++ -std=c++11 -c struct.cpp
 
-utParser: main.o
-ifeq (${OS}, Windows_NT)
-	g++ -o hw6 main.o -lgtest
-else
-	g++ -o hw6 main.o -lgtest -lpthread
-endif
+utIterator: mainIterator.o atom.o list.o struct.o iterator.h utIterator.h node.h
+	g++ -o hw7 mainIterator.o atom.o list.o struct.o -lgtest -lpthread
 
-main.o: main.cpp utParser.h number.h atom.h term.h variable.h global.h parser.h scanner.h node.h
-	g++ -std=gnu++0x -c main.cpp
-
+mainIterator.o: mainIterator.cpp utIterator.h
+	g++ -std=gnu++0x -c mainIterator.cpp
 
 clean:
-ifeq (${OS}, Windows_NT)
-	del *.o *.exe
-else
-	rm -f *.o utParser hw6
-endif
+	rm -f *.o utIterator hw7
+stat:
+	wc *.h *.cpp
