@@ -92,24 +92,37 @@ public:
   friend class List;
 
   void first(){
-
+    _itQueue.push( _term->createIterator() ) ;
   }
 
   void next(){
-
+    if( !isDone())
+      if( haveChild() ){
+        _itQueue.push( currentItem()->createIterator() ) ;
+        _itQueue.front()->next();
+        if( _itQueue.front()->isDone() )
+          _itQueue.pop();
+      } // haveChild()
+      else {
+        _itQueue.front()->next();
+        if( _itQueue.front()->isDone() )
+          _itQueue.pop();
+      } // !haveChild()
   }
 
   Term* currentItem() const {
-
+    return _itQueue.front()->currentItem();
   }
 
   bool isDone() const {
-
+    return _itQueue.empty() ;
   }
 
 private:
   BFSIterator(Term* term):_term(term) {}
   Term* _term;
+  queue<Iterator<Term *> *> _itQueue ;
+  bool haveChild() { return !currentItem()->createIterator()->isDone() ; }
 };
 
 template <class T>
@@ -119,24 +132,35 @@ public:
   friend class List;
 
   void first(){
-
+    _itStack.push( _term->createIterator() ) ;
   }
 
   void next(){
-
+    if( !isDone())
+      if( haveChild() ) _itStack.push( currentItem()->createIterator() ) ;
+      else {
+        _itStack.top()->next();
+        while (!isDone() && _itStack.top()->isDone()) {
+          _itStack.pop();
+          if (!isDone())
+            _itStack.top()->next();
+        }
+      } // !haveChild()
   }
 
   Term* currentItem() const {
-
+    return _itStack.top()->currentItem();
   }
 
   bool isDone() const {
-
+    return _itStack.empty() ;
   }
 
 private:
   DFSIterator(Term* term):_term(term) {}
   Term* _term;
+  stack<Iterator<Term *> *> _itStack ;
+  bool haveChild() { return !currentItem()->createIterator()->isDone() ; }
 };
 
 #endif
