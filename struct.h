@@ -5,8 +5,14 @@
 #include "variable.h"
 #include <vector>
 #include <string>
-
 using std::string;
+
+template <class T>
+class Iterator;
+template <class T>
+class BFSIterator;
+template <class T>
+class DFSIterator;
 
 class Struct: public Term {
 public:
@@ -14,9 +20,9 @@ public:
     _args = args;
   }
 
-  Iterator * createIterator();
-  Iterator * createBFSIterator();
-  Iterator * createDFSIterator();
+  Iterator<Term *> * createIterator();
+  Iterator<Term *> * createBFSIterator();
+  Iterator<Term *> * createDFSIterator();
 
   Term * args(int index) {
     return _args[index];

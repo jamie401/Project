@@ -17,7 +17,7 @@ TEST(iterator, struct_iterator) {
     Struct t(Atom("t"), { &X, &two });
     Struct s(Atom("s"), { &one, &t, &Y });
     // StructIterator it(&s);
-    Iterator *itStruct = s.createIterator();
+    Iterator<Term *> *itStruct = s.createIterator();
     // Iterator& itStruct = it;
     // ASSERT_EQ(it.first()->symbol());
     itStruct->first();
@@ -40,12 +40,12 @@ TEST(iterator, nested_struct_iterator) {
   Number two(2);
   Struct t(Atom("t"), { &X, &two });
   Struct s(Atom("s"), { &one, &t, &Y });
-  Iterator *it = s.createIterator();
+  Iterator<Term *> *it = s.createIterator();
   it->first();
   it->next();
   Struct *s2 = dynamic_cast<Struct *>(it->currentItem());
 
-  Iterator *it2 = s2->createIterator();
+  Iterator<Term *> *it2 = s2->createIterator();
   it2->first();
   ASSERT_EQ("X", it2->currentItem()->symbol());
   ASSERT_FALSE(it2->isDone());
@@ -64,7 +64,7 @@ TEST(iterator, list_iterator) {
     Number two(2);
     Struct t(Atom("t"), { &X, &two });
     List l({ &one, &t, &Y });
-    Iterator *itList = l.createIterator();
+    Iterator<Term *> *itList = l.createIterator();
 //    ListIterator it(&l);
 //    Iterator* itList = &it;
     itList->first();
@@ -87,7 +87,7 @@ TEST(iterator, nested_list_iterator) {
     Number two(2);
     List l2( { &X, &two } );
     List l({ &one, &l2, &Y } );
-    Iterator *itList = l.createIterator();
+    Iterator<Term *> *itList = l.createIterator();
 //    ListIterator it(&l);
 //    Iterator* itList = &it;
     itList->first();
@@ -95,7 +95,7 @@ TEST(iterator, nested_list_iterator) {
     ASSERT_FALSE(itList->isDone());
     itList->next();
     List *pl = dynamic_cast<List *>(itList->currentItem());
-    Iterator *it2 = pl->createIterator();
+    Iterator<Term *> *it2 = pl->createIterator();
     it2->first();
     ASSERT_EQ("X", it2->currentItem()->symbol());
     ASSERT_FALSE(it2->isDone());
@@ -113,7 +113,7 @@ TEST(iterator, null_Iterator){
   // // NullIterator nullIterator(&one);
   // nullIterator.first();
   // ASSERT_TRUE(nullIterator.isDone());
-  Iterator * it = one.createIterator();
+  Iterator<Term *> * it = one.createIterator();
   it->first();
   ASSERT_TRUE(it->isDone());
 }

@@ -8,6 +8,7 @@
 using std::stack;
 using std::queue;
 
+template <class T>
 class Iterator {
 public:
   virtual void first() = 0;
@@ -16,7 +17,8 @@ public:
   virtual bool isDone() const = 0;
 };
 
-class NullIterator :public Iterator{
+template <class T>
+class NullIterator :public Iterator<T>{
 public:
   friend class Term;
   void first(){}
@@ -31,7 +33,8 @@ private:
   NullIterator(Term *n){}
 };
 
-class StructIterator :public Iterator {
+template <class T>
+class StructIterator :public Iterator<T> {
 public:
   friend class Struct;
 
@@ -56,7 +59,8 @@ private:
   Struct* _s;
 };
 
-class ListIterator :public Iterator {
+template <class T>
+class ListIterator :public Iterator<T> {
 public:
   friend class List;
 
@@ -81,7 +85,8 @@ private:
   List* _list;
 };
 
-class BFSIterator :public Iterator {
+template <class T>
+class BFSIterator :public Iterator<T> {
 public:
   friend class Struct;
   friend class List;
@@ -107,7 +112,8 @@ private:
   Term* _term;
 };
 
-class DFSIterator :public Iterator {
+template <class T>
+class DFSIterator :public Iterator<T> {
 public:
   friend class Struct;
   friend class List;
