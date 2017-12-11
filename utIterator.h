@@ -7,7 +7,9 @@
 #include "list.h"
 #include "iterator.h"
 #include "number.h"
-TEST(iterator, first) {
+
+// s( 1, t(X, 2), Y )
+TEST(iterator, struct_iterator) {
     Number one(1);
     Variable X("X");
     Variable Y("Y");
@@ -30,30 +32,32 @@ TEST(iterator, first) {
     ASSERT_TRUE(itStruct->isDone());
 }
 
-// TEST(iterator, nested_iterator) {
-//   Number one(1);
-//   Variable X("X");
-//   Variable Y("Y");
-//   Number two(2);
-//   Struct t(Atom("t"), { &X, &two });
-//   Struct s(Atom("s"), { &one, &t, &Y });
-  // StructIterator it(&s);
-  // it.first();
-  // it.next();
-  // Struct *s2 = dynamic_cast<Struct *>(it.currentItem());
+// s(1, t(X, 2), Y)
+TEST(iterator, nested_struct_iterator) {
+  Number one(1);
+  Variable X("X");
+  Variable Y("Y");
+  Number two(2);
+  Struct t(Atom("t"), { &X, &two });
+  Struct s(Atom("s"), { &one, &t, &Y });
+  Iterator *it = s.createIterator();
+  it->first();
+  it->next();
+  Struct *s2 = dynamic_cast<Struct *>(it->currentItem());
 
-  // StructIterator it2(s2);
-  // it2.first();
-  // ASSERT_EQ("X", it2.currentItem()->symbol());
-  // ASSERT_FALSE(it2.isDone());
-  // it2.next();
-  // ASSERT_EQ("2", it2.currentItem()->symbol());
-  // ASSERT_FALSE(it2.isDone());
-  // it2.next();
-  // ASSERT_TRUE(it2.isDone());
-// }
+  Iterator *it2 = s2->createIterator();
+  it2->first();
+  ASSERT_EQ("X", it2->currentItem()->symbol());
+  ASSERT_FALSE(it2->isDone());
+  it2->next();
+  ASSERT_EQ("2", it2->currentItem()->symbol());
+  ASSERT_FALSE(it2->isDone());
+  it2->next();
+  ASSERT_TRUE(it2->isDone());
+}
 
-TEST(iterator, firstList) {
+// [ 1, t(X, 2), Y ]
+TEST(iterator, list_iterator) {
     Number one(1);
     Variable X("X");
     Variable Y("Y");
@@ -75,7 +79,35 @@ TEST(iterator, firstList) {
     ASSERT_TRUE(itList->isDone());
 }
 
-TEST(iterator, NullIterator){
+// [ 1, [X, 2], Y ]
+TEST(iterator, nested_list_iterator) {
+    Number one(1);
+    Variable X("X");
+    Variable Y("Y");
+    Number two(2);
+    List l2( { &X, &two } );
+    List l({ &one, &l2, &Y } );
+    Iterator *itList = l.createIterator();
+//    ListIterator it(&l);
+//    Iterator* itList = &it;
+    itList->first();
+    ASSERT_EQ("1", itList->currentItem()->symbol());
+    ASSERT_FALSE(itList->isDone());
+    itList->next();
+    List *pl = dynamic_cast<List *>(itList->currentItem());
+    Iterator *it2 = pl->createIterator();
+    it2->first();
+    ASSERT_EQ("X", it2->currentItem()->symbol());
+    ASSERT_FALSE(it2->isDone());
+    it2->next();
+    ASSERT_EQ("2", it2->currentItem()->symbol());
+    ASSERT_FALSE(it2->isDone());
+    it2->next();
+    ASSERT_TRUE(it2->isDone());
+}
+
+// 1
+TEST(iterator, null_Iterator){
   Number one(1);
   // Iterator *itNum = one.createIterator();
   // // NullIterator nullIterator(&one);

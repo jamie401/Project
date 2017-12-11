@@ -34,6 +34,7 @@ private:
 class StructIterator :public Iterator {
 public:
   friend class Struct;
+
   void first() {
     _index = 0;
   }
@@ -80,12 +81,56 @@ private:
   List* _list;
 };
 
-class BFSIterator :public Term {
+class BFSIterator :public Iterator {
+public:
+  friend class Struct;
+  friend class List;
 
+  void first(){
+
+  }
+
+  void next(){
+
+  }
+
+  Term* currentItem() const {
+
+  }
+
+  bool isDone() const {
+
+  }
+
+private:
+  BFSIterator(Term* term):_term(term) {}
+  Term* _term;
 };
 
-class DFSIterator :public Term {
+class DFSIterator :public Iterator {
+public:
+  friend class Struct;
+  friend class List;
 
+  void first(){
+
+  }
+
+  void next(){
+
+  }
+
+  Term* currentItem() const {
+
+  }
+
+  bool isDone() const {
+
+  }
+
+private:
+  DFSIterator(Term* term):_term(term) {}
+  Term* _term;
 };
 
 #endif

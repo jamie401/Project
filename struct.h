@@ -15,6 +15,8 @@ public:
   }
 
   Iterator * createIterator();
+  Iterator * createBFSIterator();
+  Iterator * createDFSIterator();
 
   Term * args(int index) {
     return _args[index];
