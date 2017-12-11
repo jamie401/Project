@@ -14,6 +14,8 @@ public:
     _args = args;
   }
 
+  Iterator * createIterator();
+
   Term * args(int index) {
     return _args[index];
   }
@@ -41,7 +43,6 @@ public:
     return ret;
   }
   int arity() const {return _args.size();}
-  Iterator * createIterator();
 
   void haveVar(Variable *var){ // have same Variable, then match
     for(int i = 0; i < _args.size() ; i++) {

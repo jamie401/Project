@@ -3,6 +3,10 @@
 
 #include "struct.h"
 #include "list.h"
+#include <stack>
+#include <queue>
+using std::stack;
+using std::queue;
 
 class Iterator {
 public:
@@ -14,7 +18,7 @@ public:
 
 class NullIterator :public Iterator{
 public:
-  NullIterator(Term *n){}
+  friend class Term;
   void first(){}
   void next(){}
   Term * currentItem() const{
@@ -23,7 +27,8 @@ public:
   bool isDone() const{
     return true;
   }
-
+private:
+  NullIterator(Term *n){}
 };
 
 class StructIterator :public Iterator {
@@ -52,7 +57,7 @@ private:
 
 class ListIterator :public Iterator {
 public:
-  ListIterator(List *list): _index(0), _list(list) {}
+  friend class List;
 
   void first() {
     _index = 0;
@@ -70,7 +75,17 @@ public:
     _index++;
   }
 private:
+  ListIterator(List *list): _index(0), _list(list) {}
   int _index;
   List* _list;
 };
+
+class BFSIterator :public Term {
+
+};
+
+class DFSIterator :public Term {
+
+};
+
 #endif
