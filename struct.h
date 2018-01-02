@@ -2,27 +2,30 @@
 #define STRUCT_H
 
 #include "atom.h"
-#include "variable.h"
 #include <vector>
 #include <string>
-using std::string;
 
-template <class T>
-class Iterator;
-template <class T>
-class BFSIterator;
-template <class T>
-class DFSIterator;
+using std::string;
 
 class Struct: public Term {
 public:
-  Struct(Atom name, std::vector<Term *> args): _name(name) {
-    _args = args;
+  Struct(Atom name, std::vector<Term *> args): _name(name), _args(args){
   }
 
-  Iterator<Term *> * createIterator();
-  Iterator<Term *> * createBFSIterator();
-  Iterator<Term *> * createDFSIterator();
+
+  bool match(Term &term) {
+    if (term.getVariable() != nullptr) {
+      return term.match(*this);
+    }
+    Struct *s = term.getStruct();
+    if (s == nullptr || s->arity() != arity() || !_name.match(s->_name))
+      return false;
+
+    for (int i = 0; i < _args.size(); i++)
+      if (!s->_args[i]->match(*_args[i]))
+        return false;
+    return true;
+  }
 
   Term * args(int index) {
     return _args[index];
@@ -31,39 +34,31 @@ public:
   Atom & name() {
     return _name;
   }
+
   string symbol() const {
-    if(_args.empty())
-    return  _name.symbol() + "()";
-    string ret = _name.symbol() + "(";
-    std::vector<Term *>::const_iterator it = _args.begin();
-    for (; it != _args.end()-1; ++it)
-      ret += (*it)->symbol()+", ";
-    ret  += (*it)->symbol()+")";
-    return ret;
+      string ret = _name.symbol() + "(";
+      for (int i = 0; i < _args.size(); i++)
+        ret += ((i > 0) ?  ", "  : "") + _args[i]->symbol();
+      return ret + ")";
   }
 
   string value() const {
     string ret = _name.symbol() + "(";
-    std::vector<Term *>::const_iterator it = _args.begin();
-    for (; it != _args.end()-1; ++it)
-      ret += (*it)->value()+", ";
-    ret  += (*it)->value()+")";
-    return ret;
-  }
-  int arity() const {return _args.size();}
-
-  void haveVar(Variable *var){ // have same Variable, then match
-    for(int i = 0; i < _args.size() ; i++) {
-      if( var->symbol() == _args[i]->symbol() ){
-        var->match(*(_args[i]));
-        return;
-      }
-      Struct * ps = dynamic_cast<Struct *>(_args[i]);
-      if(ps) ps->haveVar(var);
-    }
+    for (int i = 0; i < _args.size(); i++)
+      ret += ((i > 0) ?  ", "  : "") + _args[i]->value();
+    return ret + ")";
   }
 
-private:
+  int arity() const {
+    return _args.size();
+  }
+
+  Struct* getStruct() {
+    return this;
+  }
+
+  Iterator * createIterator();
+protected:
   Atom _name;
   std::vector<Term *> _args;
 };
