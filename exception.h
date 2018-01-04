@@ -1,15 +1,4 @@
-#ifndef EXCEPTION_H
-#define EXCEPTION_H
 
-#include "scanner.h"
-#include "parser.h"
-
-// class Shell : public :: testing::Test {
-// protected:
-//   void SetUp(){
-//     symtable.clear();
-//   }
-// };
 /**
  *
  * Here are some examples for exception handling,
@@ -93,5 +82,3 @@ TEST(Shell, exception_UnbalancedOperator2) {
     ASSERT_EQ("Unbalanced operator", msg);
   }
 }
-
-#endif

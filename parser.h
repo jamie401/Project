@@ -1,6 +1,7 @@
 #ifndef PARSER_H
 #define PARSER_H
 #include <string>
+#include <map>
 using std::string;
 
 #include "atom.h"
@@ -13,6 +14,7 @@ using std::string;
 #include <stack>
 
 using std::stack;
+using namespace std;
 
 class Parser{
 public:
@@ -22,7 +24,16 @@ public:
     int token = _scanner.nextToken();
     _currentToken = token;
     if(token == VAR){
-      return new Variable(symtable[_scanner.tokenValue()].first);
+      l_it = _mapv.find(symtable[_scanner.tokenValue()].first);
+      if(l_it==_mapv.end()){
+        Variable * v =new Variable(symtable[_scanner.tokenValue()].first);
+        _mapv.insert(std::pair<string,Variable*>(symtable[_scanner.tokenValue()].first,v));
+        return v;
+      }
+      else
+        return l_it->second;
+
+
     }else if(token == NUMBER){
       return new Number(_scanner.tokenValue());
     }else if(token == ATOM || token == ATOMSC){
@@ -36,7 +47,6 @@ public:
     else if(token == '['){
       return list();
     }
-
     return nullptr;
   }
 
@@ -78,10 +88,7 @@ public:
   }
 
   void buildExpression(){
-    if ( _scanner.unexpectedPeriod( ";." ) )
-      throw string("Unexpected ';' before '.'");
-    if ( _scanner.unexpectedPeriod( ",." ) )
-      throw string("Unexpected ',' before '.'");
+    // createTerm();
     disjunctionMatch();
     restDisjunctionMatch();
     if (createTerm() != nullptr || _currentToken != '.')
@@ -91,6 +98,8 @@ public:
   void restDisjunctionMatch() {
     if (_scanner.currentChar() == ';') {
       createTerm();
+      if(_scanner.currentChar() == '.')
+       throw string("Unexpected ';' before '.'");
       disjunctionMatch();
       Exp *right = _expStack.top();
       _expStack.pop();
@@ -99,6 +108,7 @@ public:
       _expStack.push(new DisjExp(left, right));
       restDisjunctionMatch();
     }
+
   }
 
   void disjunctionMatch() {
@@ -109,6 +119,8 @@ public:
   void restConjunctionMatch() {
     if (_scanner.currentChar() == ',') {
       createTerm();
+      if(_scanner.currentChar() == '.')
+       throw string("Unexpected ',' before '.'");
       conjunctionMatch();
       Exp *right = _expStack.top();
       _expStack.pop();
@@ -125,13 +137,25 @@ public:
       Term * right = createTerm();
       _expStack.push(new MatchExp(left, right));
     }
-    else {
-      throw string(left->value() + " does never get assignment");
+    else if(_currentToken == ';' && _scanner.currentChar()== '.'){
+      throw string("Unexpected ';' before '.'");
     }
+    else if(_currentToken == ',' && _scanner.currentChar()== '.'){
+      throw string("Unexpected ',' before '.'");
+    }
+    else if(_currentToken == '.'){
+      string msg = left->symbol() + " does never get assignment" ;
+      throw string(msg);
+    }
+
   }
 
   Exp* getExpressionTree(){
     return _expStack.top();
+  }
+
+  string getResult(){
+    return _expStack.top()->getExpressionResult() + ".";
   }
 
 private:
@@ -151,6 +175,9 @@ private:
       }
     }
   }
+
+  map<string,Variable*> _mapv;
+  map<string,Variable*>::iterator l_it;
 
   vector<Term *> _terms;
   Scanner _scanner;

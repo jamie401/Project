@@ -60,7 +60,7 @@ public:
 
   string extractAtom() {
     int posBegin = position();
-    for (;isalnum(buffer[pos]); ++pos);
+    for (;isalnum(buffer[pos]) || buffer[pos] == '_'; ++pos);
     return buffer.substr(posBegin, pos-posBegin);
   }
 
@@ -78,12 +78,6 @@ public:
 
   char extractChar() {
     return buffer[pos++];
-  }
-
-  bool unexpectedPeriod( string aim ) { // ex "X;." or "X,."
-    if( buffer.find(aim) == buffer.npos )
-      return false ;
-    return true ;
   }
 
 private:
