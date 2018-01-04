@@ -249,16 +249,14 @@ TEST(Shell, conjunctionMatching_falseAndfalse) {
 //   try {
 //     p.buildExpression();
 //
-//      /**
-//      *  maybe your implementation here.
-//      */
+//     string result = p.getResult();
 //
 //     ASSERT_EQ("X = 1; X = 2.", result);
 //   } catch (std::string &msg) {
 //     FAIL() << msg;
 //   }
 // }
-//
+
 // TEST(Shell, disjunctionMatching2) {
 //   Scanner s("X=1; X=1, X=2.");
 //   Parser p(s);
@@ -336,22 +334,5 @@ TEST(Shell, conjunctionMatching_falseAndfalse) {
 //     ASSERT_EQ("X = 1; Z = 3.", result);
 //   } catch (std::string &msg) {
 //     FAIL() << msg;
-//   }
-// }
-//
-//
-// TEST(Shell, exceptionMissingPeriodToken) {
-//   Scanner s("X=1");
-//   Parser p(s);
-//   try {
-//     p.buildExpression();
-//
-//      /**
-//      *  maybe your implementation here.
-//      */
-//
-//     FAIL() << "It should throw an exception: Missing token '.'";
-//   } catch (std::string &msg) {
-//     ASSERT_EQ("Missing token '.'", msg);
 //   }
 // }
