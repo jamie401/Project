@@ -1,10 +1,17 @@
-all: exception
+all: exception shell
 
 exception: mainException.o atom.o list.o struct.o scanner.h parser.h exception.h
 ifeq (${OS}, Windows_NT)
 	g++ -o hw8 mainException.o atom.o list.o struct.o -lgtest
 else
 	g++ -o hw8 mainException.o atom.o list.o struct.o -lgtest -lpthread
+endif
+
+shell: shell.o atom.o list.o struct.o scanner.h parser.h exception.h
+ifeq (${OS}, Windows_NT)
+	g++ -o shell shell.o atom.o list.o struct.o -lgtest
+else
+	g++ -o shell shell.o atom.o list.o struct.o -lgtest -lpthread
 endif
 
 atom.o: atom.cpp atom.h variable.h
@@ -15,12 +22,14 @@ struct.o:struct.cpp struct.h
 	g++ -std=gnu++0x -c struct.cpp
 mainException.o: mainException.cpp scanner.h  atom.h struct.h variable.h parser.h exception.h expression.h
 	g++ -std=gnu++0x -c mainException.cpp
+shell.o: shell.cpp scanner.h  atom.h struct.h variable.h parser.h
+	g++ -std=gnu++0x -c shell.cpp
 
 clean:
 ifeq (${OS}, Windows_NT)
 	del *.o *.exe
 else
-	rm -f *.o exception hw8
+	rm -f *.o exception hw8 shell
 endif
 
 # all: madRace utAtom utVariable utScanner utIterator

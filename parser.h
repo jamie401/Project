@@ -152,7 +152,8 @@ public:
       string msg = left->symbol() + " does never get assignment" ;
       throw string(msg);
     }
-
+    else
+      throw string("inputs don't follow the rule.");
   }
 
   Exp* getExpressionTree(){
@@ -165,11 +166,11 @@ public:
   }
 
 private:
-  FRIEND_TEST(ParserTest, createArgs);
-  FRIEND_TEST(ParserTest,ListOfTermsEmpty);
-  FRIEND_TEST(ParserTest,listofTermsTwoNumber);
-  FRIEND_TEST(ParserTest, createTerm_nestedStruct3);
-  FRIEND_TEST(ParserTest, createTerms);
+  // FRIEND_TEST(ParserTest, createArgs);
+  // FRIEND_TEST(ParserTest,ListOfTermsEmpty);
+  // FRIEND_TEST(ParserTest,listofTermsTwoNumber);
+  // FRIEND_TEST(ParserTest, createTerm_nestedStruct3);
+  // FRIEND_TEST(ParserTest, createTerms);
 
   void createTerms() {
     Term* term = createTerm();
