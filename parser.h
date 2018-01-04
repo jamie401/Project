@@ -21,12 +21,14 @@ class Parser{
 public:
   Parser(Scanner scanner) : _scanner(scanner), _terms() {}
 
+  bool isReDisj = false ;
+
   Term* createTerm(){
     int token = _scanner.nextToken();
     _currentToken = token;
     if(token == VAR){
       l_it = _mapv.find(symtable[_scanner.tokenValue()].first);
-      if(l_it==_mapv.end()){
+      if(l_it==_mapv.end() || isReDisj){
         Variable * v =new Variable(symtable[_scanner.tokenValue()].first);
         _mapv.insert(std::pair<string,Variable*>(symtable[_scanner.tokenValue()].first,v));
         return v;
@@ -98,6 +100,7 @@ public:
 
   void restDisjunctionMatch() {
     if (_scanner.currentChar() == ';') {
+      isReDisj = true ;
       createTerm();
       if(_scanner.currentChar() == '.')
        throw string("Unexpected ';' before '.'");
@@ -119,6 +122,7 @@ public:
 
   void restConjunctionMatch() {
     if (_scanner.currentChar() == ',') {
+      isReDisj = false ;
       createTerm();
       if(_scanner.currentChar() == '.')
        throw string("Unexpected ',' before '.'");
