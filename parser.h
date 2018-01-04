@@ -155,7 +155,8 @@ public:
   }
 
   string getResult(){
-    return _expStack.top()->getExpressionResult() + ".";
+    vector<string> v; //
+    return _expStack.top()->getExpressionResult( v ) + ".";
   }
 
 private:
