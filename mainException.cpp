@@ -1,5 +1,4 @@
 #include <gtest/gtest.h>
-#include "utScanner.h"
 #include "exception.h"
 #include "expression.h"
 

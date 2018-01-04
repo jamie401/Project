@@ -1,4 +1,5 @@
-
+#ifndef EXPRESSION_H
+#define EXPRESSION_H
 /**
  *
  * Here are some examples for exception handling,
@@ -326,3 +327,5 @@ TEST(Shell, disjunctionMatching6) {
     FAIL() << msg;
   }
 }
+
+#endif

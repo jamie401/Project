@@ -1,10 +1,10 @@
 all: exception
 
-exception: mainScanner.o atom.o list.o struct.o scanner.h utScanner.h parser.h
+exception: mainException.o atom.o list.o struct.o scanner.h parser.h exception.h
 ifeq (${OS}, Windows_NT)
-	g++ -o hw8 mainScanner.o atom.o list.o struct.o -lgtest
+	g++ -o hw8 mainException.o atom.o list.o struct.o -lgtest
 else
-	g++ -o hw8 mainScanner.o atom.o list.o struct.o -lgtest -lpthread
+	g++ -o hw8 mainException.o atom.o list.o struct.o -lgtest -lpthread
 endif
 
 atom.o: atom.cpp atom.h variable.h
@@ -13,8 +13,8 @@ list.o:list.cpp list.h
 	g++ -std=gnu++0x -c list.cpp
 struct.o:struct.cpp struct.h
 	g++ -std=gnu++0x -c struct.cpp
-mainScanner.o: mainScanner.cpp utScanner.h scanner.h  atom.h struct.h variable.h parser.h exception.h expression.h
-	g++ -std=gnu++0x -c mainScanner.cpp
+mainException.o: mainException.cpp scanner.h  atom.h struct.h variable.h parser.h exception.h expression.h
+	g++ -std=gnu++0x -c mainException.cpp
 
 clean:
 ifeq (${OS}, Windows_NT)
