@@ -13,7 +13,7 @@ TEST(Shell, varMatchAtomSuc) {
   try{
     p.buildExpression();
 
-     string result = p.getResult();
+    string result = p.getResult();
 
     ASSERT_EQ("FILCO = awesome.", result);
   } catch (std::string & msg) {
@@ -230,19 +230,19 @@ TEST(Shell, conjunctionMatching_falseAndfalse) {
   }
 }
 
-// TEST(Shell, conjunctionMatching_duplicateExp) {
-//   Scanner s("Y=1, X=2, X=2.");
-//   Parser p(s);
-//   try {
-//     p.buildExpression();
-//
-//     string result = p.getResult();
-//
-//     ASSERT_EQ("Y = 1, X = 2.", result);
-//   } catch (std::string &msg) {
-//     FAIL() << msg;
-//   }
-// }
+TEST(Shell, conjunctionMatching_duplicateExp) {
+  Scanner s("Y=1, X=2, X=2.");
+  Parser p(s);
+  try {
+    p.buildExpression();
+
+    string result = p.getResult();
+
+    ASSERT_EQ("Y = 1, X = 2.", result);
+  } catch (std::string &msg) {
+    FAIL() << msg;
+  }
+}
 
 TEST(Shell, disjunctionMatching1) {
   Scanner s("X=1; X=2.");
@@ -300,19 +300,19 @@ TEST(Shell, disjunctionMatching4) {
   }
 }
 
-// TEST(Shell, disjunctionMatching5) {
-//   Scanner s("X=1; X=X; Y=2.");
-//   Parser p(s);
-//   try {
-//     p.buildExpression();
-//
-//     string result = p.getResult();
-//
-//     ASSERT_EQ("X = 1; true; Y = 2.", result);
-//   } catch (std::string &msg) {
-//     FAIL() << msg;
-//   }
-// }
+TEST(Shell, disjunctionMatching5) {
+  Scanner s("X=1; X=X; Y=2.");
+  Parser p(s);
+  try {
+    p.buildExpression();
+
+    string result = p.getResult();
+
+    ASSERT_EQ("X = 1; true; Y = 2.", result);
+  } catch (std::string &msg) {
+    FAIL() << msg;
+  }
+}
 
 TEST(Shell, disjunctionMatching6) {
   Scanner s("X=1; X=1, X=2; Z=3.");

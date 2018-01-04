@@ -51,36 +51,17 @@ public:
   string getExpressionResult(vector<string> _vectorOfExp) {
     string output = "";
     bool noSameExp = true;
-    // static vector<string> _vectorOfExp;
     if(evaluate()){
 
       if ( _vectorOfExp.size() == 0 ) // _vectorOfExp is null
       {
-        std::cout << "\n1\n" ; //
         _vectorOfExp.push_back( _left->getExpressionResult(_vectorOfExp) ) ;
         output += _left->getExpressionResult(_vectorOfExp) ;
       }
-      else // XX
-      {
-        // std::cout << "\nelse\n" ; //
-        // for( int index = 0 ; index < _vectorOfExp.size() ; index++ )
-        //   if( _vectorOfExp[index] == _left->getExpressionResult(_vectorOfExp) )
-        //     noSameExp = false ;
-        //
-        // if( noSameExp )
-        // {
-        //   std::cout << "\nnoSameExp\n" ; //
-        //   _vectorOfExp.push_back( _left->getExpressionResult(_vectorOfExp) ) ;
-        //   output += _left->getExpressionResult(_vectorOfExp) ;
-        // }
-      }
 
-      for( int index = 0 ; index < _vectorOfExp.size() ; index++ )
-        std::cout << "exp.h_getConjExpRusult:No." << index << ": " << _vectorOfExp[index] << "|end|\n" ;
       MatchExp* dM = dynamic_cast<MatchExp *>(_right);
       if (dM) // if _righ is last(MatchExp)
       {
-        std::cout << "\ndM\n" ; //
         for( int index = 0 ; index < _vectorOfExp.size() ; index++ )
           if( _vectorOfExp[index] == _right->getExpressionResult(_vectorOfExp) )
             return output ; // ExpressionResult already exist
@@ -89,16 +70,19 @@ public:
           if( trueAndExp( _vectorOfExp ) ){
             if( _left->getExpressionResult(_vectorOfExp) == "true" )
               return _right->getExpressionResult(_vectorOfExp); // if true, Exp only return Exp
+
             if( _right->getExpressionResult(_vectorOfExp) == "true" )
               return _left->getExpressionResult(_vectorOfExp); // if true, Exp only return Exp
+
           }
+
+          if( _vectorOfExp[0].find(_right->getExpressionResult(_vectorOfExp)) != string::npos )
+            return _vectorOfExp[0] ;
           return output + ", " + _right->getExpressionResult(_vectorOfExp); // normal return
         }
 
       }
 
-      // std::cout << "\nX_end_X\n" ; //
-      // return output + _right->getExpressionResult(_vectorOfExp);
     }
     else
       return "false"; // evaluate() = false
@@ -127,31 +111,14 @@ public:
 
   }
 
-  bool trueAndExp(vector<string> _vectorOfExp){
-    if( _right->getExpressionResult(_vectorOfExp) != _left->getExpressionResult(_vectorOfExp) )
-      if( _left->getExpressionResult(_vectorOfExp) == "true" || _right->getExpressionResult(_vectorOfExp) == "true" )
-        return true ;
-    return false;
-  }
-
   string getExpressionResult(vector<string> v) {
-    string output = "";
-    bool noSameExp = true;
     v.clear();
-    // evaluate();
-    if( _left->getExpressionResult( v ) == "true" || _left->getExpressionResult( v ) == "false") {
-      std::cout << "\nDisjExp:1\n" ;
+    if(  _left->getExpressionResult( v ) == "false")
       return _right->getExpressionResult( v ) ;
-    }
-    else if ( _right->getExpressionResult( v ) == "true" || _right->getExpressionResult( v ) == "false" ) {
-      std::cout << "\nDisjExp:2\n" ;
+    else if (  _right->getExpressionResult( v ) == "false" )
       return _left->getExpressionResult( v ) ;
-    }
-    else {
-      std::cout << "\nDisjExp:3\n" ;
+    else
       return _left->getExpressionResult( v ) + "; " + _right->getExpressionResult( v ) ;
-    }
-
 
   }
 
